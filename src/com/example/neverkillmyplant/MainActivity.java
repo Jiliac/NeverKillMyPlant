@@ -11,13 +11,14 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 	ArrayList<Plant> plantList;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		plantList = new ArrayList<Plant>();
-		
+
 		Button addPlanButton = (Button) findViewById(R.id.button1);
 		addPlanButton.setOnClickListener(new View.OnClickListener() {
 
@@ -37,10 +38,12 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	public void onResume(){
+
+	public void onResume() {
 		Intent intent = getIntent();
-		plantList = intent.getParcelableExtra("plantList");
+		if (intent.getParcelableExtra("plantList") != null)
+			plantList = intent.getParcelableExtra("plantList");
+		int i = 0;
 	}
 
 }
