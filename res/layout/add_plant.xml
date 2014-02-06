@@ -35,6 +35,6 @@
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="53dp"
-        android:text="Button" />
+        android:text="@string/add" />
 
 </RelativeLayout>
