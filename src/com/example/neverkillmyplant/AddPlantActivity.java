@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class AddPlantActivity extends Activity {
+public class AddPlantActivity extends Activity implements View.OnClickListener{
 	ArrayList<Plant> plantList = new ArrayList<Plant>();
 
 	@Override
@@ -19,24 +19,7 @@ public class AddPlantActivity extends Activity {
 		setContentView(R.layout.add_plant);
 
 		Button addPlanButton = (Button) findViewById(R.id.button1);
-		addPlanButton.setOnClickListener(new View.OnClickListener() {
-			EditText et = (EditText) findViewById(R.id.editText1);
-			String name = et.getText().toString();
-
-			@Override
-			public void onClick(View v) {
-				Plant plant = new Plant(name);
-				plantList.add(plant);
-				Intent retour = new Intent(AddPlantActivity.this,
-						MainActivity.class);
-				
-				// ajout d'un extra
-				retour.putExtra("plantList",plant);
-				
-				
-				startActivity(retour);
-			}
-		});
+		addPlanButton.setOnClickListener(this);
 	}
 
 	@Override
@@ -45,4 +28,23 @@ public class AddPlantActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	public void onClick(View v) {
+		
+		EditText et = (EditText) findViewById(R.id.editText1);
+		String name = et.getText().toString();
+		
+		
+		Plant plant = new Plant(name);
+		plantList.add(plant);
+		Intent retour = new Intent(AddPlantActivity.this,
+				MainActivity.class);
+		
+		// ajout d'un extra
+		retour.putExtra("plantList",plant);
+		
+		
+		startActivity(retour);
+	}
+	
 }
