@@ -25,9 +25,15 @@ public class AddPlantActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				plantList.add(new Plant(name));
+				Plant plant = new Plant(name);
+				plantList.add(plant);
 				Intent retour = new Intent(AddPlantActivity.this,
 						MainActivity.class);
+				
+				// ajout d'un extra
+				retour.putExtra("plantList",plant);
+				
+				
 				startActivity(retour);
 			}
 		});
@@ -39,5 +45,4 @@ public class AddPlantActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
 }

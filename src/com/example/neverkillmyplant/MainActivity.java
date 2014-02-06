@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends Activity {
 	
-	ArrayList<Plant> pl;
+	ArrayList<Plant> plantList = new ArrayList<Plant>();
 	
 	
 	@Override
@@ -34,11 +34,27 @@ public class MainActivity extends Activity {
 		});
 		
 		// ajout dynamique de bouton pour les plantes
-		for(Plant plant : pl){
+		for(Plant plant : plantList){
 			ajoutBouton(plant.getName());
+			
 		}
 	}
-
+	
+	protected void onResume(){
+		super.onResume();
+		
+		Intent intent = getIntent();
+		Plant plant;
+		if (intent.getParcelableExtra("plantList") != null)
+			plant = intent.getParcelableExtra("plantList");
+		else
+			plant = new Plant("Bug");
+		ajoutBouton(plant.getName());
+	}
+	
+	
+	/************************** methode auxiliaires ******************/
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -50,8 +66,6 @@ public class MainActivity extends Activity {
 		LinearLayout layoutOfDynamicContent = (LinearLayout) findViewById(R.id.layoutTest);
 		layoutOfDynamicContent.removeAllViewsInLayout();
 		
-		//LinearLayout postLayout = new LinearLayout(this);
-
 		Button bouton = new Button(this);
 		bouton.setText(str);
 		
@@ -59,5 +73,8 @@ public class MainActivity extends Activity {
 				LinearLayout.LayoutParams.FILL_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
 		layoutOfDynamicContent.addView(bouton, layoutParam);
+		
 	}
+	
+	
 }
