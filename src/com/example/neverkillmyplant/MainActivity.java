@@ -12,20 +12,20 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends Activity {
 
-	ArrayList<Plant> plantList = new ArrayList<Plant>();
+	static ArrayList<Plant> plantList = new ArrayList<Plant>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// Creation de la page de base
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		/*
-		// on récupère la sauvegarde
-		if (getIntent().getParcelableArrayListExtra("plantList") != null)
-			plantList = getIntent().getParcelableArrayListExtra("plantList");
-		*/
-		
+		 * // on récupère la sauvegarde if
+		 * (getIntent().getParcelableArrayListExtra("plantList") != null)
+		 * plantList = getIntent().getParcelableArrayListExtra("plantList");
+		 */
+
 		Button addPlanButton = (Button) findViewById(R.id.button1);
 		addPlanButton.setOnClickListener(new View.OnClickListener() {
 
@@ -34,22 +34,19 @@ public class MainActivity extends Activity {
 				Intent add = new Intent(MainActivity.this,
 						AddPlantActivity.class);
 				startActivity(add);
-			}
-		});
+			}});
 	}
 
 	protected void onResume() {
 		super.onResume();
 
 		// on ajoute la nouvelle plant à la liste
-		Plant plant;
-		Intent intent = getIntent(); // ATTENTION que se passe-t-il si on vient
-										// de PlatCard activity
+		Plant plant = null;
+		Intent intent = getIntent(); 
 		if (intent.getParcelableExtra("plant") != null)
 			plant = intent.getParcelableExtra("plant");
-		else
-			plant = new Plant("Bug!"); /* c'est juste pour le debug */
-		plantList.add(plant);
+		if (plant != null)
+			plantList.add(plant);
 
 		ajoutBouton();
 	}
@@ -60,7 +57,7 @@ public class MainActivity extends Activity {
 		// on crée dynamiquement un bouton par l'intermédiaire d'un layout
 		LinearLayout layoutOfDynamicContent = (LinearLayout) findViewById(R.id.layoutTest);
 		LinearLayout A = new LinearLayout(this);
-		A.setOrientation(LinearLayout.HORIZONTAL);
+		A.setOrientation(LinearLayout.VERTICAL);
 		for (Plant plant : plantList) {
 			// on crée
 			Button bouton = new Button(this);

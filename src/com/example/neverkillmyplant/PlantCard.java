@@ -1,22 +1,20 @@
 package com.example.neverkillmyplant;
 
 import java.io.File;
-
+import java.io.IOException;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
-import android.net.Uri;
 
 public class PlantCard extends Activity {
-
-	int PHOTO_RESULT;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,17 +28,7 @@ public class PlantCard extends Activity {
 			}
 		});
 
-		// puis le deuxieme
-		Button photo = (Button) findViewById(R.id.button2);
-		photo.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				File mFichier = new File(Environment.getExternalStorageDirectory(), "photo.jpg");
-				Uri fileUri = Uri.fromFile(mFichier);
-				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-				intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-				startActivityForResult(intent, PHOTO_RESULT);
-			}
-		});
+		ajoutBoutonDiagnostique();
 
 		// on récupère la plante que l'on doit afficher
 		Intent startIntent = getIntent();
@@ -56,5 +44,44 @@ public class PlantCard extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (requestCode == TAKE_PHOTO_CODE && resultCode == RESULT_OK) {
+			Log.d("CameraDemo", "Pic saved");
+
+		}
+	}
+
+	/********* on recupere une photo pour le module diagnostique ************/
+	int TAKE_PHOTO_CODE = 0;
+
+	private void ajoutBoutonDiagnostique() {
+		// on créer le dossier de reception
+		final String dir = Environment
+				.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+				+ "/picFolder/";
+		File newdir = new File(dir);
+		newdir.mkdirs();
+
+		Button photo = (Button) findViewById(R.id.button2);
+		photo.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				String file = dir + ".jpg";
+				File newfile = new File(file);
+				try {
+					newfile.createNewFile();
+				} catch (IOException e) {
+				}
+				Uri outputFileUri = Uri.fromFile(newfile);
+				Intent cameraIntent = new Intent(
+						MediaStore.ACTION_IMAGE_CAPTURE);
+				cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+				startActivityForResult(cameraIntent, TAKE_PHOTO_CODE);
+			}
+		});
 	}
 }
