@@ -16,11 +16,16 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
 		// Creation de la page de base
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		
+		/*
+		// on récupère la sauvegarde
+		if (getIntent().getParcelableArrayListExtra("plantList") != null)
+			plantList = getIntent().getParcelableArrayListExtra("plantList");
+		*/
+		
 		Button addPlanButton = (Button) findViewById(R.id.button1);
 		addPlanButton.setOnClickListener(new View.OnClickListener() {
 
@@ -31,9 +36,6 @@ public class MainActivity extends Activity {
 				startActivity(add);
 			}
 		});
-
-		// ajout dynamique de bouton pour les plantes
-
 	}
 
 	protected void onResume() {
@@ -54,13 +56,6 @@ public class MainActivity extends Activity {
 
 	/************************** methode auxiliaires ******************/
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
 	public void ajoutBouton() {
 		// on crée dynamiquement un bouton par l'intermédiaire d'un layout
 		LinearLayout layoutOfDynamicContent = (LinearLayout) findViewById(R.id.layoutTest);
@@ -79,4 +74,15 @@ public class MainActivity extends Activity {
 
 	}
 
+	protected void onSaveInstanceState(Bundle outState) {
+		outState.putParcelableArrayList("plantList", plantList);
+		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
 }
