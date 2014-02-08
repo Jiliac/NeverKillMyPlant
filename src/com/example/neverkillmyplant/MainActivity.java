@@ -49,9 +49,7 @@ public class MainActivity extends Activity {
 			plant = new Plant("Bug!"); /* c'est juste pour le debug */
 		plantList.add(plant);
 
-		// et on affiche
-		for (Plant parcours : plantList)
-			ajoutBouton(parcours);
+		ajoutBouton();
 	}
 
 	/************************** methode auxiliaires ******************/
@@ -63,22 +61,22 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	public void ajoutBouton(Plant plant) {
-		String str = plant.getName();
-
+	public void ajoutBouton() {
 		// on crée dynamiquement un bouton par l'intermédiaire d'un layout
 		LinearLayout layoutOfDynamicContent = (LinearLayout) findViewById(R.id.layoutTest);
-		LinearLayout.LayoutParams layoutParam = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.FILL_PARENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
+		LinearLayout A = new LinearLayout(this);
+		A.setOrientation(LinearLayout.HORIZONTAL);
+		for (Plant plant : plantList) {
+			// on crée
+			Button bouton = new Button(this);
+			bouton.setText(plant.getName());
+			// on affiche
+			A.addView(bouton);
+			// on va vers la fiche de la plante lors du click
+			bouton.setOnClickListener(new clickPlantButton(plant, this));
+		}
+		layoutOfDynamicContent.addView(A);
 
-		Button bouton = new Button(this);
-		bouton.setText(str);
-
-		layoutOfDynamicContent.addView(bouton, layoutParam);
-
-		// on va vers la fiche de la plante
-		bouton.setOnClickListener(new clickPlantButton(plant, this));
 	}
 
 }
