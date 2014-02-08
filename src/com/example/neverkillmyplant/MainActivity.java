@@ -11,13 +11,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 public class MainActivity extends Activity {
-	
+
 	ArrayList<Plant> plantList = new ArrayList<Plant>();
-	
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
+
 		// Creation de la page de base
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
@@ -32,29 +31,31 @@ public class MainActivity extends Activity {
 				startActivity(add);
 			}
 		});
-		
+
 		// ajout dynamique de bouton pour les plantes
-		for(Plant plant : plantList){
-			ajoutBouton(plant.getName());
-			
-		}
+
 	}
-	
-	protected void onResume(){
+
+	protected void onResume() {
 		super.onResume();
-		
-		Intent intent = getIntent();
+
+		// on ajoute la nouvelle plant à la liste
 		Plant plant;
-		if (intent.getParcelableExtra("plantList") != null)
-			plant = intent.getParcelableExtra("plantList");
+		Intent intent = getIntent(); // ATTENTION que se passe-t-il si on vient
+										// de PlatCard activity
+		if (intent.getParcelableExtra("plant") != null)
+			plant = intent.getParcelableExtra("plant");
 		else
-			plant = new Plant("Bug");
-		ajoutBouton(plant.getName());
+			plant = new Plant("Bug!"); /* c'est juste pour le debug */
+		plantList.add(plant);
+
+		// et on affiche
+		for (Plant parcours : plantList)
+			ajoutBouton(parcours);
 	}
-	
-	
+
 	/************************** methode auxiliaires ******************/
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -62,19 +63,22 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	public void ajoutBouton(String str) {
+	public void ajoutBouton(Plant plant) {
+		String str = plant.getName();
+
+		// on crée dynamiquement un bouton par l'intermédiaire d'un layout
 		LinearLayout layoutOfDynamicContent = (LinearLayout) findViewById(R.id.layoutTest);
-		layoutOfDynamicContent.removeAllViewsInLayout();
-		
-		Button bouton = new Button(this);
-		bouton.setText(str);
-		
 		LinearLayout.LayoutParams layoutParam = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.FILL_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
+
+		Button bouton = new Button(this);
+		bouton.setText(str);
+
 		layoutOfDynamicContent.addView(bouton, layoutParam);
-		
+
+		// on va vers la fiche de la plante
+		bouton.setOnClickListener(new clickPlantButton(plant, this));
 	}
-	
-	
+
 }

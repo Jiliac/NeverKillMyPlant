@@ -29,7 +29,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/ratingBar1"
         android:layout_marginBottom="30dp"
-        android:text="Photo Diagnostique" />
+        android:text="@string/photo" />
 
     <TextView
         android:id="@+id/textView1"
@@ -38,5 +38,13 @@
         android:layout_alignRight="@+id/ratingBar1"
         android:layout_alignTop="@+id/imageView1"
         android:text="TextView" />
+
+    <Button
+        android:id="@+id/Button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_below="@+id/ratingBar1"
+        android:text="@string/retour" />
 
 </RelativeLayout>

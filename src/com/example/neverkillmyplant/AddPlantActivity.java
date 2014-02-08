@@ -1,7 +1,5 @@
 package com.example.neverkillmyplant;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class AddPlantActivity extends Activity implements View.OnClickListener{
-	ArrayList<Plant> plantList = new ArrayList<Plant>();
-
-	@Override
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_plant);
@@ -34,14 +30,12 @@ public class AddPlantActivity extends Activity implements View.OnClickListener{
 		EditText et = (EditText) findViewById(R.id.editText1);
 		String name = et.getText().toString();
 		
-		
-		Plant plant = new Plant(name);
-		plantList.add(plant);
 		Intent retour = new Intent(AddPlantActivity.this,
 				MainActivity.class);
 		
 		// ajout d'un extra
-		retour.putExtra("plantList",plant);
+		Plant plant = new Plant(name);
+		retour.putExtra("plant",plant);
 		
 		
 		startActivity(retour);
