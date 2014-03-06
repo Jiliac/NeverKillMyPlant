@@ -18,14 +18,13 @@
         <requestFocus />
     </EditText>
 
-
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="90dp"
         android:src="@drawable/ficus" />
 
     <Button
@@ -34,7 +33,23 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="53dp"
+        android:layout_marginTop="23dp"
         android:text="@string/add" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner1"
+        android:layout_centerHorizontal="true"
+        android:entries="@array/sticker" />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText1"
+        android:layout_centerHorizontal="true"
+        android:entries="@array/plantType" />
 
 </RelativeLayout>

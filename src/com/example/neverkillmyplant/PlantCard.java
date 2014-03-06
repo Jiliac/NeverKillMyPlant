@@ -37,6 +37,8 @@ public class PlantCard extends Activity {
 		// et on definit la TextView
 		TextView plantName = (TextView) findViewById(R.id.textView1);
 		plantName.setText(plant.getName());
+		TextView plantEspece = (TextView) findViewById(R.id.textView2);
+		plantEspece.setText(plant.getEspece());
 	}
 
 	@Override
@@ -70,7 +72,7 @@ public class PlantCard extends Activity {
 		Button photo = (Button) findViewById(R.id.button2);
 		photo.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				String file = dir + ".jpg";
+				String file = dir + "photo.jpg";
 				File newfile = new File(file);
 				try {
 					newfile.createNewFile();
