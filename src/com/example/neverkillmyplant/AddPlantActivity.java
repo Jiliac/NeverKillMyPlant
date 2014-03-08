@@ -1,7 +1,6 @@
 package com.example.neverkillmyplant;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -32,19 +31,26 @@ public class AddPlantActivity extends Activity implements View.OnClickListener {
 		return true;
 	}
 
+	//  IL FAUT PREVOIR LE CAS OU L'UTILISATEUR UTILISE LE BOUTON BACK
+	// p-e faire que onPause appelle onDestroy et faire add...
+	
 	public void onClick(View v) {
 
 		EditText et = (EditText) findViewById(R.id.editText1);
 		String name = et.getText().toString();
 
-		Intent retour = new Intent(AddPlantActivity.this, MainActivity.class);
-
-		// ajout d'un extra
+		// creation de la plante
 		String textSticker = sticker.getSelectedItem().toString();
 		String textespece = espece.getSelectedItem().toString();
 		Plant plant = new Plant(name, textespece, textSticker);
-		retour.putExtra("plant", plant);
 
-		startActivity(retour);
+		// sauvegarde de cette plante
+		PlantArray planteListe = new PlantArray("liste.data");
+		plant.setId(planteListe.size());
+		planteListe.add(plant);
+		planteListe.save("liste.data");
+		
+		
+		finish();
 	}
 }

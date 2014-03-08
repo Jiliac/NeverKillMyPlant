@@ -15,19 +15,23 @@ import android.widget.TextView;
 import android.view.View;
 
 public class PlantCard extends Activity {
+	
+	// IL FAUDRAIT FAIRE UN BOUTON REMOVE
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.plant_card_activity);
 
-		// on s'occupe de définir le premier bouton
+		// definition du bouton retour
 		Button retour = (Button) findViewById(R.id.button1);
 		retour.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				startActivity(new Intent(PlantCard.this, MainActivity.class));
+				finish();
 			}
 		});
-
+		
+		// ajout d'un bouton pour le module diagnostique
 		ajoutBoutonDiagnostique();
 
 		// on récupère la plante que l'on doit afficher

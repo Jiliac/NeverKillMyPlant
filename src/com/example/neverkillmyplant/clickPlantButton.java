@@ -3,6 +3,7 @@ package com.example.neverkillmyplant;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
+import android.os.Parcelable;
 
 public class clickPlantButton implements View.OnClickListener {
 	private Plant plant;
@@ -15,7 +16,7 @@ public class clickPlantButton implements View.OnClickListener {
 
 	public void onClick(View arg0) {
 		Intent intent = new Intent(departureActivity, PlantCard.class);
-		intent.putExtra("plant", plant);
+		intent.putExtra("plant", (Parcelable) plant);
 		departureActivity.startActivity(intent);
 	}
 
