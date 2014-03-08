@@ -31,11 +31,19 @@ public class AddPlantActivity extends Activity implements View.OnClickListener {
 		return true;
 	}
 
-	//  IL FAUT PREVOIR LE CAS OU L'UTILISATEUR UTILISE LE BOUTON BACK
+	// IL FAUT PREVOIR LE CAS OU L'UTILISATEUR UTILISE LE BOUTON BACK
 	// p-e faire que onPause appelle onDestroy et faire add...
-	
-	public void onClick(View v) {
 
+	public void onClick(View v) {
+		finish();
+	}
+
+	public void onPause() {
+		super.onPause();
+		addPlant();
+	}
+
+	public void addPlant() {
 		EditText et = (EditText) findViewById(R.id.editText1);
 		String name = et.getText().toString();
 
@@ -49,8 +57,7 @@ public class AddPlantActivity extends Activity implements View.OnClickListener {
 		plant.setId(planteListe.size());
 		planteListe.add(plant);
 		planteListe.save("liste.data");
-		
-		
+
 		finish();
 	}
 }

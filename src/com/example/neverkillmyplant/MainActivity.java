@@ -17,9 +17,7 @@ public class MainActivity extends Activity {
 		// Creation de la page de base
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		//reset(); // ATTENTION INSTRUCTION DE DEBUG
-
+		
 		// les boutons ont besoin d'être réaffiché.
 		planteListe = new PlantArray();
 		plantesAffichees = new PlantArray();
