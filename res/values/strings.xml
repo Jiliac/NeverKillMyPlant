@@ -14,7 +14,9 @@
     <string-array name="sticker">
         <item>Sticker Carré</item>
         <item>Sticker Rond</item>
-    </string-array> 
+    </string-array>
+    <string name="testDiag">Diagnostique (test)</string>
+    <string name="testHydra">Hydratation</string> 
     
     
 

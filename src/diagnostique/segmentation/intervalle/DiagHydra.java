@@ -10,6 +10,8 @@ import diagnostique.reconnaissance.Ensemble;
 import diagnostique.reconnaissance.Point;
 
 public class DiagHydra {
+	private Class diag;
+
 	public DiagHydra(String nomFichierEntree) {
 		// Creation d'une image BufferedImage
 
@@ -34,5 +36,10 @@ public class DiagHydra {
 
 		// analyse
 		Ensemble ensembleAAnlyser = new Ensemble(img, sortieATrier);
+		diag = ensembleAAnlyser.diagnostique();
+	}
+
+	public Class diagnostique() {
+		return diag;
 	}
 }

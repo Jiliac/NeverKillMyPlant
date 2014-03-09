@@ -13,28 +13,12 @@
         android:layout_marginTop="53dp"
         android:src="@drawable/ficus" />
 
-    <RatingBar
-        android:id="@+id/ratingBar1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageView1"
-        android:layout_below="@+id/imageView1"
-        android:layout_marginTop="80dp" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/ratingBar1"
-        android:layout_alignTop="@+id/imageView1"
-        android:text="TextView" />
-
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ratingBar1"
-        android:layout_toRightOf="@+id/imageView1"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_alignTop="@+id/button2"
         android:text="@string/retour" />
 
     <Button
@@ -43,25 +27,43 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/ratingBar1"
         android:layout_marginBottom="32dp"
+        android:layout_marginLeft="38dp"
+        android:layout_toRightOf="@+id/imageView1"
         android:text="@string/photo" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignLeft="@+id/textView3"
         android:layout_below="@+id/textView1"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="20dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignTop="@+id/imageView1"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView2"
+        android:layout_alignBottom="@+id/imageView1"
+        android:layout_alignRight="@+id/button2"
+        android:layout_marginRight="24dp"
         android:text="TextView" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_centerVertical="true"
+        android:text="@string/testDiag" />
 
 </RelativeLayout>

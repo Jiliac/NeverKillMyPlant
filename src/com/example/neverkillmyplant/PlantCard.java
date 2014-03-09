@@ -24,7 +24,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
 
-public class PlantCard extends Activity {
+public class PlantCard extends Activity implements View.OnClickListener {
 
 	// IL FAUDRAIT FAIRE UN BOUTON REMOVE
 
@@ -41,6 +41,10 @@ public class PlantCard extends Activity {
 			}
 		});
 
+		// test d'integration du module diagnostique
+		Button testDiag = (Button) findViewById(R.id.button3);
+		testDiag.setOnClickListener(this);
+
 		// ajout d'un bouton pour le module diagnostique
 		ajoutBoutonDiagnostique();
 
@@ -54,7 +58,8 @@ public class PlantCard extends Activity {
 		TextView plantEspece = (TextView) findViewById(R.id.textView2);
 		plantEspece.setText(plant.getEspece());
 		TextView santePlant = (TextView) findViewById(R.id.textView3);
-		getSantePlant(santePlant, "http://google.com");
+		getSantePlant(santePlant,
+				"http://89.156.29.238:8080/rpztix/plants/1/sante?method=plain");
 	}
 
 	/******************** recupere la sante d'une plante sur le serveur *****************/
@@ -64,7 +69,13 @@ public class PlantCard extends Activity {
 			protected void onPostExecute(String result) {
 				// TODO Auto-generated method stub
 				super.onPostExecute(result);
-				santePlant.setText(result);
+				int res = Integer.parseInt(result);
+				String str;
+				if (res == 1)
+					str = "bonne";
+				else
+					str = "mauvaise";
+				santePlant.setText("La sante de cette plante est: " + str);
 			}
 
 			@Override
@@ -83,7 +94,7 @@ public class PlantCard extends Activity {
 					if (entity != null) {
 						return EntityUtils.toString(entity);
 					} else {
-						return "No string.";
+						return "No string";
 					}
 				} catch (Exception e) {
 					return "Network problem";
@@ -122,6 +133,11 @@ public class PlantCard extends Activity {
 				startActivityForResult(cameraIntent, TAKE_PHOTO_CODE);
 
 				DiagHydra dh = new DiagHydra(file);
+				if (dh.diagnostique() != null) {
+					Intent diag = new Intent(PlantCard.this, dh.diagnostique());
+					startActivity(diag);
+				}
+
 			}
 		});
 	}
@@ -142,5 +158,11 @@ public class PlantCard extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+
+	@Override
+	public void onClick(View v) {
+		Intent toto = new Intent(PlantCard.this, DiagnostiqueActivity.class);
+		startActivity(toto);
 	}
 }
