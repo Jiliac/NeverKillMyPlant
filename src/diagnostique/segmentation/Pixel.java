@@ -1,6 +1,6 @@
 package diagnostique.segmentation;
 
-import android.graphics.Color;
+import diagnostique.segmentation.distance.*;
 
 public class Pixel {
 

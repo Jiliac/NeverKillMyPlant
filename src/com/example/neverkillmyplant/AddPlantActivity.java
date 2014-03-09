@@ -53,10 +53,12 @@ public class AddPlantActivity extends Activity implements View.OnClickListener {
 		Plant plant = new Plant(name, textespece, textSticker);
 
 		// sauvegarde de cette plante
-		PlantArray planteListe = new PlantArray("liste.data");
-		plant.setId(planteListe.size());
-		planteListe.add(plant);
-		planteListe.save("liste.data");
+		if (name != "") {
+			PlantArray planteListe = new PlantArray("liste.data");
+			plant.setId(planteListe.size());
+			planteListe.add(plant);
+			planteListe.save("liste.data");
+		}
 
 		finish();
 	}

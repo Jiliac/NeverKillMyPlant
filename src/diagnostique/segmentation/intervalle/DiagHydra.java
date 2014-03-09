@@ -1,20 +1,21 @@
-package diagnostique.segmentation;
+package diagnostique.segmentation.intervalle;
 
 import java.util.ArrayList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import diagnostique.segmentation.Colour;
+import diagnostique.segmentation.Global;
+import diagnostique.segmentation.Pixel;
 import diagnostique.reconnaissance.Ensemble;
 import diagnostique.reconnaissance.Point;
 
-public class DiagMainClass {
-	public DiagMainClass(String nomFichierEntree) {
+public class DiagHydra {
+	public DiagHydra(String nomFichierEntree) {
 		// Creation d'une image BufferedImage
 
 		Bitmap img = BitmapFactory.decodeFile(nomFichierEntree);
 
-		Kppv analyse = new Kppv();
-		ArrayList<Pixel> baseDApprentissage = analyse.getBase();
-
+		MethodeSeuil analyse = new MethodeSeuil(Global.baseIntervalle);
 		Point sortieATrier[][] = new Point[img.getWidth()][img.getHeight()];
 
 		// segmentation
@@ -24,16 +25,7 @@ public class DiagMainClass {
 				// analyse
 				Colour c = new Colour(img.getPixel(x, y));
 				Pixel pixel = new Pixel(c);
-				analyse.kppv(pixel);
-
-				// on affiche le resultat de la segmentation
-				System.out.println(pixel.getnumGroupe());
-				if (pixel.getnumGroupe() > 0) {
-					Colour newColor = baseDApprentissage.get(
-							pixel.getnumGroupe() - 1).getColor();
-					int rgb = newColor.getRGB();
-					img.setPixel(x, y, Colour.RGBtoARGB(rgb));
-				}
+				analyse.setGroupe(pixel);
 
 				// preparation de l'analyse
 				sortieATrier[x][y] = new Point(x, y, pixel);
@@ -43,5 +35,4 @@ public class DiagMainClass {
 		// analyse
 		Ensemble ensembleAAnlyser = new Ensemble(img, sortieATrier);
 	}
-
 }

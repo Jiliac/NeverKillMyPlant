@@ -2,6 +2,8 @@ package com.example.neverkillmyplant;
 
 import java.io.File;
 import java.io.IOException;
+
+import diagnostique.segmentation.intervalle.DiagHydra;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -87,6 +89,10 @@ public class PlantCard extends Activity {
 						MediaStore.ACTION_IMAGE_CAPTURE);
 				cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
 				startActivityForResult(cameraIntent, TAKE_PHOTO_CODE);
+				
+				System.out.println("ici");
+				DiagHydra dh = new DiagHydra(file);
+				System.out.println("et la");
 			}
 		});
 	}

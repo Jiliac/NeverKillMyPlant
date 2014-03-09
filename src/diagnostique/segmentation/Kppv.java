@@ -1,7 +1,6 @@
 package diagnostique.segmentation;
 
 import java.util.ArrayList;
-import diagnostique.segmentation.baseDApprentissage.*;
 
 public class Kppv {
 	private ArrayList<Pixel> baseDApprentissage = Global.baseDApprentissage;
