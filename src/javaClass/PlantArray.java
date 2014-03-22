@@ -1,4 +1,4 @@
-package com.example.neverkillmyplant;
+package javaClass;
 
 import java.io.Externalizable;
 import java.io.File;
@@ -31,8 +31,9 @@ public class PlantArray extends ArrayList<Plant> implements Externalizable {
 	public void load(String str) {
 		PlantArray listeIntermediaire = new PlantArray();
 		try {
-			File storageFile = new File(
-					Environment.getExternalStorageDirectory(), str);
+			File storageFile = new File(Environment
+					.getExternalStorageDirectory().getAbsolutePath()
+					+ File.separator + str);
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(
 					storageFile));
 			listeIntermediaire = (PlantArray) ois.readObject();
@@ -54,8 +55,9 @@ public class PlantArray extends ArrayList<Plant> implements Externalizable {
 
 	public void save(String str) {
 		try {
-			File storageFile = new File(
-					Environment.getExternalStorageDirectory(), str);
+			File storageFile = new File(Environment
+					.getExternalStorageDirectory().getAbsolutePath()
+					+ File.separator + str);
 			ObjectOutputStream oos = new ObjectOutputStream(
 					new FileOutputStream(storageFile));
 			oos.writeObject(this);

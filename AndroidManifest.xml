@@ -33,6 +33,8 @@
         </activity>
         <activity android:name="DiagHyd" >
         </activity>
+        <activity android:name="DefaultPage" >
+        </activity>
     </application>
 	
 </manifest>

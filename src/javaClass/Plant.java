@@ -1,4 +1,4 @@
-package com.example.neverkillmyplant;
+package javaClass;
 
 import java.io.Externalizable;
 import java.io.IOException;

@@ -2,6 +2,8 @@ package diagnostique.reconnaissance;
 
 import java.util.ArrayList;
 
+import com.example.neverkillmyplant.DefaultPage;
+import com.example.neverkillmyplant.DiagFer;
 import com.example.neverkillmyplant.DiagHyd;
 
 import android.graphics.Bitmap;
@@ -10,6 +12,7 @@ import diagnostique.reconnaissance.ListeEqui;
 
 public class Ensemble {
 	private Class diag = null;
+
 	public Class diagnostique() {
 		return diag;
 	}
@@ -38,9 +41,9 @@ public class Ensemble {
 	private ArrayList<Collection> newEnsemble = new ArrayList<Collection>();
 
 	public void mainAlgo() {
-		//pour la detection de jaunissement
+		// pour la detection de jaunissement
 		int compteurJaunePix = 0;
-		
+
 		// donne valeur a grIn de tous les points
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
@@ -87,7 +90,7 @@ public class Ensemble {
 			Point pivot = collec.get(0);
 			if (pivot.getGrIn() != pivot.getGrOut())
 				ensembleCopie.add(collec);
-			else if(pivot.getGrOut()==2)
+			else if (pivot.getGrOut() == 2)
 				compteurJaunePix += collec.size();
 		}
 		ensemble = ensembleCopie;
@@ -130,11 +133,13 @@ public class Ensemble {
 					compteur++;
 			System.out.println("Il y a " + compteur
 					+ " zone(s) de cet intervalle");
-			if(compteurJaunePix>this.height*this.width/3)
-				if(compteur<3)
-					this.diag=DiagHyd.class;
+			if (compteurJaunePix > this.height * this.width / 3) {
+				if (compteur < 3)
+					this.diag = DiagHyd.class;
 				else
-					this.diag=DiagHyd.class;
+					this.diag = DiagFer.class;
+			} else
+				this.diag = DefaultPage.class;
 		}
 
 		// on imprime en console les collections selectionnees

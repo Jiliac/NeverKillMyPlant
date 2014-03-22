@@ -1,4 +1,6 @@
-package com.example.neverkillmyplant;
+package javaClass;
+
+import com.example.neverkillmyplant.PlantCard;
 
 import android.app.Activity;
 import android.content.Intent;

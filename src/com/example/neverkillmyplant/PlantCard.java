@@ -2,6 +2,7 @@ package com.example.neverkillmyplant;
 
 import java.io.File;
 import java.io.IOException;
+import javaClass.Plant;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -9,6 +10,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+
 
 import diagnostique.segmentation.intervalle.DiagHydra;
 import android.app.Activity;
@@ -58,8 +60,8 @@ public class PlantCard extends Activity implements View.OnClickListener {
 		TextView plantEspece = (TextView) findViewById(R.id.textView2);
 		plantEspece.setText(plant.getEspece());
 		TextView santePlant = (TextView) findViewById(R.id.textView3);
-		getSantePlant(santePlant,
-				"http://89.156.29.238:8080/rpztix/plants/1/sante?method=plain");
+		//getSantePlant(santePlant,
+			//	"http://89.156.29.238:8080/rpztix/plants/1/sante?method=plain");
 	}
 
 	/******************** recupere la sante d'une plante sur le serveur *****************/

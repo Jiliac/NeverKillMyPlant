@@ -1,5 +1,8 @@
 package com.example.neverkillmyplant;
 
+import javaClass.Plant;
+import javaClass.PlantArray;
+import javaClass.clickPlantButton;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;

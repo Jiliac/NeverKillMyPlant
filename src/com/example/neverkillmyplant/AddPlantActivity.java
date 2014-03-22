@@ -1,5 +1,7 @@
 package com.example.neverkillmyplant;
 
+import javaClass.Plant;
+import javaClass.PlantArray;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
