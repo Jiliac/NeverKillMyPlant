@@ -11,6 +11,8 @@ public class DiagMainClass {
 		// Creation d'une image BufferedImage
 
 		Bitmap img = BitmapFactory.decodeFile(nomFichierEntree);
+		int density = img.getDensity();
+		img.setDensity(density/10);
 
 		Kppv analyse = new Kppv();
 		ArrayList<Pixel> baseDApprentissage = analyse.getBase();

@@ -11,12 +11,19 @@ import diagnostique.reconnaissance.Point;
 
 public class DiagHydra {
 	private Class diag;
+	Bitmap img;
 
 	public DiagHydra(String nomFichierEntree) {
-		// Creation d'une image BufferedImage
+		img = BitmapFactory.decodeFile(nomFichierEntree);
+		this.go();
+	}
 
-		Bitmap img = BitmapFactory.decodeFile(nomFichierEntree);
+	public DiagHydra(Bitmap img) {
+		this.img = img;
+		this.go();
+	}
 
+	private void go() {
 		MethodeSeuil analyse = new MethodeSeuil(Global.baseIntervalle);
 		Point sortieATrier[][] = new Point[img.getWidth()][img.getHeight()];
 

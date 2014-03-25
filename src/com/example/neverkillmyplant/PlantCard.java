@@ -11,10 +11,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-
 import diagnostique.segmentation.intervalle.DiagHydra;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -60,8 +60,8 @@ public class PlantCard extends Activity implements View.OnClickListener {
 		TextView plantEspece = (TextView) findViewById(R.id.textView2);
 		plantEspece.setText(plant.getEspece());
 		TextView santePlant = (TextView) findViewById(R.id.textView3);
-		//getSantePlant(santePlant,
-			//	"http://89.156.29.238:8080/rpztix/plants/1/sante?method=plain");
+		// getSantePlant(santePlant,
+		// "http://89.156.29.238:8080/rpztix/plants/1/sante?method=plain");
 	}
 
 	/******************** recupere la sante d'une plante sur le serveur *****************/
@@ -109,7 +109,9 @@ public class PlantCard extends Activity implements View.OnClickListener {
 
 	/********* on recupere une photo pour le module diagnostique ************/
 
-	int TAKE_PHOTO_CODE = 0;
+	static int TAKE_PICTURE = 1;
+	String file;
+	Bitmap img;
 
 	private void ajoutBoutonDiagnostique() {
 		// on créer le dossier de reception
@@ -122,6 +124,9 @@ public class PlantCard extends Activity implements View.OnClickListener {
 		Button photo = (Button) findViewById(R.id.button2);
 		photo.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
+				Intent cameraIntent = new Intent(
+						MediaStore.ACTION_IMAGE_CAPTURE);
+				/*
 				String file = dir + "photo.jpg";
 				File newfile = new File(file);
 				try {
@@ -129,27 +134,39 @@ public class PlantCard extends Activity implements View.OnClickListener {
 				} catch (IOException e) {
 				}
 				Uri outputFileUri = Uri.fromFile(newfile);
-				Intent cameraIntent = new Intent(
-						MediaStore.ACTION_IMAGE_CAPTURE);
+				
 				cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-				startActivityForResult(cameraIntent, TAKE_PHOTO_CODE);
-
-				DiagHydra dh = new DiagHydra(file);
-				if (dh.diagnostique() != null) {
-					Intent diag = new Intent(PlantCard.this, dh.diagnostique());
-					startActivity(diag);
-				}
-
+				*/
+				startActivityForResult(cameraIntent, TAKE_PICTURE);
 			}
 		});
+	}
+
+	private void analyse(String fileName) {
+		DiagHydra dh = new DiagHydra(fileName);
+		if (dh.diagnostique() != null) {
+			Intent diag = new Intent(PlantCard.this, dh.diagnostique());
+			startActivity(diag);
+		}
+	}
+
+	private void analyse(Bitmap img) {
+		DiagHydra dh = new DiagHydra(img);
+		if (dh.diagnostique() != null) {
+			Intent diag = new Intent(PlantCard.this, dh.diagnostique());
+			startActivity(diag);
+		}
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		if (requestCode == TAKE_PHOTO_CODE && resultCode == RESULT_OK) {
-			Log.d("CameraDemo", "Pic saved");
+		if (requestCode == TAKE_PICTURE && resultCode == RESULT_OK
+				&& data != null) {
+			Bundle extras = data.getExtras();
+			img = (Bitmap) extras.get("data");
+			this.analyse(img);
 
 		}
 	}

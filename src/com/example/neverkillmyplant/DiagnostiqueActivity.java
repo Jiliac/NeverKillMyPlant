@@ -22,9 +22,9 @@ public class DiagnostiqueActivity extends Activity {
 		ImageButton testHydra = (ImageButton) findViewById(R.id.imageButton1);
 		testHydra.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				DiagHydra dh = new DiagHydra(Environment
-						.getExternalStorageDirectory().getAbsolutePath()
-						+ File.separator + "testhydra.jpg");
+				String str = Environment.getExternalStorageDirectory()
+						.getAbsolutePath() + File.separator + "testhydra.jpg";
+				DiagHydra dh = new DiagHydra(str);
 				Intent toto = new Intent(DiagnostiqueActivity.this, dh
 						.diagnostique());
 				startActivity(toto);
