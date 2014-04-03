@@ -77,7 +77,6 @@ public class MainActivity extends Activity {
 			}
 		}
 		layoutOfDynamicContent.addView(A);
-
 	}
 
 	// methode de debug

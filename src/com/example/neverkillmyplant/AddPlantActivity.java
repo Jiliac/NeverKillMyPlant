@@ -3,12 +3,18 @@ package com.example.neverkillmyplant;
 import javaClass.Plant;
 import javaClass.PlantArray;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import android.os.Parcelable;
 
 public class AddPlantActivity extends Activity implements View.OnClickListener {
 	private Spinner espece;
@@ -61,7 +67,18 @@ public class AddPlantActivity extends Activity implements View.OnClickListener {
 			planteListe.add(plant);
 			planteListe.save("liste.data");
 		}
-
+		
+		// on crée l'alarme concernant cette plante
+		setAlarm(plant);
+		
 		finish();
+	}
+	
+	private void setAlarm(Plant plant){
+		Intent i = new Intent(getApplicationContext(),CheckHealth.class);
+		i.putExtra("plant",(Parcelable)plant);
+		PendingIntent pi = PendingIntent.getService(getApplicationContext(), 0, i, 0);
+		AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
+		manager.setRepeating(AlarmManager.RTC, System.currentTimeMillis(),AlarmManager.INTERVAL_HALF_DAY, pi);
 	}
 }

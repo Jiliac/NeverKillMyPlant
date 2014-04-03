@@ -60,8 +60,8 @@ public class PlantCard extends Activity implements View.OnClickListener {
 		TextView plantEspece = (TextView) findViewById(R.id.textView2);
 		plantEspece.setText(plant.getEspece());
 		TextView santePlant = (TextView) findViewById(R.id.textView3);
-		// getSantePlant(santePlant,
-		// "http://89.156.29.238:8080/rpztix/plants/1/sante?method=plain");
+		//getSantePlant(santePlant,
+		//"http://89.156.29.238:8080/rpztix/plants/1/sante?method=plain");
 	}
 
 	/******************** recupere la sante d'une plante sur le serveur *****************/
