@@ -1,4 +1,4 @@
-package com.example.neverkillmyplant;
+package com.example.neverkillmyplant.test;
 
 import com.example.neverkillmyplant.R;
 import com.example.neverkillmyplant.R.id;

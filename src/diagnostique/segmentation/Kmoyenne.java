@@ -2,9 +2,10 @@ package diagnostique.segmentation;
 
 import java.util.ArrayList;
 
-import diagnostique.segmentation.distance.*;
-
 import android.graphics.Bitmap;
+import diagnostique.segmentation.distance.DistanceBrightness;
+import diagnostique.segmentation.distance.DistanceCarre;
+import diagnostique.segmentation.distance.DistanceHue;
 
 public class Kmoyenne {
 	private ArrayList<Pixel> base;
@@ -41,6 +42,7 @@ public class Kmoyenne {
 					if (distance < minDistance) {
 						minDistance = distance;
 						pixels[x][y].setGroupe(i);
+						i++;
 					}
 				}
 			}
@@ -53,7 +55,7 @@ public class Kmoyenne {
 		boolean tests[] = new boolean[size];
 		int i = 0;
 		for (Pixel centroide : centroides) {
-			if (centroide.distance(base.get(i)) < 0.1)
+			if (centroide.distance(base.get(i)) < 0.05)
 				tests[i] = true;
 			else
 				tests[i] = false;
@@ -69,9 +71,15 @@ public class Kmoyenne {
 				base.add(centroide);
 			}
 			return analyse();
+			// return pixels;
 		}
 
 	}
+
+	/******
+	 * methode pour calculer les nouveaux centroides a partir d'une matrice de
+	 * pixel ou on a deja claculer les groupes
+	 ********/
 
 	private Pixel[] setCentroide(Pixel[][] pixels) {
 		if (Global.distance instanceof DistanceBrightness)
@@ -98,9 +106,10 @@ public class Kmoyenne {
 			for (int y = 0; y < img.getHeight(); y++) {
 				int groupe = pixels[x][y].getGroupe();
 				float brightness = pixels[x][y].getBrightness();
-				brightness = brightness * compteur[groupe]
+				brightness = brightness
+						* ((compteur[groupe] != 0) ? compteur[groupe] : 1)
 						/ (compteur[groupe] + 1);
-				pixels[x][y].setBrightness(brightness);
+				centroides[groupe].setBrightness(brightness);
 				compteur[groupe]++;
 			}
 		}
@@ -123,5 +132,11 @@ public class Kmoyenne {
 				retour = false;
 		}
 		return retour;
+	}
+
+	/****** methode pour simplifier les test de cette classe ******/
+	public static Pixel[][] analyse(Bitmap img) {
+		Kmoyenne kmoyenne = new Kmoyenne(Global.baseDApprentissage, img);
+		return kmoyenne.analyse();
 	}
 }

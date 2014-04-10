@@ -51,7 +51,7 @@ public class Pixel {
 
 	/*********** le calcul de distance *****************/
 
-	private Distance distance = Global.distance;
+	private Distance distance = new DistanceBrightness();
 
 	public double distance(Pixel p) {
 		return distance.distance(this, p);

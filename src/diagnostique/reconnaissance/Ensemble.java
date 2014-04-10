@@ -2,9 +2,9 @@ package diagnostique.reconnaissance;
 
 import java.util.ArrayList;
 
-import com.example.neverkillmyplant.DefaultPage;
-import com.example.neverkillmyplant.DiagFer;
-import com.example.neverkillmyplant.DiagHyd;
+import com.example.neverkillmyplant.test.DefaultPage;
+import com.example.neverkillmyplant.test.DiagFer;
+import com.example.neverkillmyplant.test.DiagHyd;
 
 import android.graphics.Bitmap;
 import diagnostique.segmentation.Global;

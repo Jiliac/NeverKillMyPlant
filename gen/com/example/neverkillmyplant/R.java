@@ -54,8 +54,9 @@ public final class R {
         public static final int bip=0x7f030002;
         public static final int diagfer=0x7f030003;
         public static final int diagnostique=0x7f030004;
-        public static final int ll=0x7f030005;
-        public static final int plant_card_activity=0x7f030006;
+        public static final int displaybitmap=0x7f030005;
+        public static final int ll=0x7f030006;
+        public static final int plant_card_activity=0x7f030007;
     }
     public static final class menu {
         public static final int main=0x7f080000;

@@ -11,6 +11,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import com.example.neverkillmyplant.test.DiagnostiqueActivity;
+
 import diagnostique.segmentation.intervalle.DiagHydra;
 import android.app.Activity;
 import android.content.Intent;

@@ -1,5 +1,6 @@
 package com.example.neverkillmyplant;
 
+import java.io.File;
 import java.util.Calendar;
 
 import javaClass.Plant;
@@ -64,10 +65,10 @@ public class AddPlantActivity extends Activity implements View.OnClickListener {
 
 		// sauvegarde de cette plante
 		if (name.length()>0){
-			PlantArray planteListe = new PlantArray("liste.data");
+			PlantArray planteListe = new PlantArray("neverkillmyplant"+File.separator + "liste.data");
 			plant.setId(planteListe.size());
 			planteListe.add(plant);
-			planteListe.save("liste.data");
+			planteListe.save("neverkillmyplant"+File.separator +"liste.data");
 		}
 
 		// on crée l'alarme concernant cette plante

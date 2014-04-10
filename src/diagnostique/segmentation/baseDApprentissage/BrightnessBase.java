@@ -5,7 +5,7 @@ import diagnostique.segmentation.Pixel;
 
 public class BrightnessBase extends ArrayList<Pixel> {
 	public BrightnessBase(){
-		this(4);
+		this(20);
 	}
 	
 	public BrightnessBase(int parametre) {

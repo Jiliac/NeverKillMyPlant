@@ -1,6 +1,8 @@
-package com.example.neverkillmyplant;
+package com.example.neverkillmyplant.test;
 
 import com.example.neverkillmyplant.R;
+import com.example.neverkillmyplant.R.id;
+import com.example.neverkillmyplant.R.layout;
 
 import android.app.Activity;
 import android.os.Bundle;

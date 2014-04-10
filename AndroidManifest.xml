@@ -30,13 +30,15 @@
         </activity>
         <activity android:name="PlantCard" >
         </activity>
-        <activity android:name="DiagnostiqueActivity" >
+        <activity android:name="com.example.neverkillmyplant.test.DiagnostiqueActivity" >
         </activity>
-        <activity android:name="DiagFer" >
+        <activity android:name="com.example.neverkillmyplant.test.DiagFer" >
         </activity>
-        <activity android:name="DiagHyd" >
+        <activity android:name="com.example.neverkillmyplant.test.DiagHyd" >
         </activity>
-        <activity android:name="DefaultPage" >
+        <activity android:name="com.example.neverkillmyplant.test.DefaultPage" >
+        </activity>
+        <activity android:name="com.example.neverkillmyplant.test.DisplayBitmap" >
         </activity>
         <service android:name="CheckHealth" >
         </service>

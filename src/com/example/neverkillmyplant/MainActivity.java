@@ -1,5 +1,7 @@
 package com.example.neverkillmyplant;
 
+import java.io.File;
+
 import javaClass.Plant;
 import javaClass.PlantArray;
 import javaClass.clickPlantButton;
@@ -90,8 +92,9 @@ public class MainActivity extends Activity {
 		planteListe = new PlantArray();
 		plantesAffichees = new PlantArray();
 
-		planteListe.save("liste.data");
-		plantesAffichees.save("affichage.data");
+		planteListe.save("neverkillmyplant" + File.separator + "liste.data");
+		plantesAffichees.save("neverkillmyplant" + File.separator
+				+ "affichage.data");
 	}
 
 	@Override
