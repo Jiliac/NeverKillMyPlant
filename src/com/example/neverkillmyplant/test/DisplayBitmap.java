@@ -17,5 +17,10 @@ public class DisplayBitmap extends Activity {
 		Intent display = getIntent();
 		Bitmap img = display.getParcelableExtra("image");
 		imageView.setImageBitmap(img);
+
+		ImageView imageView2 = (ImageView) findViewById(R.id.imageView2);
+		Bitmap result = display.getParcelableExtra("resultat");
+		imageView2.setImageBitmap(result);
+
 	}
 }

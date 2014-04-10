@@ -83,7 +83,7 @@ public class Collection extends ArrayList<Point> {
 	}
 
 	public String toString() {
-		String str = super.toString();
+		String str = "";
 		str += "\nje suis une collection de centre ("
 				+ this.getCentre().getPosX() + "," + this.getCentre().getPosY()
 				+ ")";

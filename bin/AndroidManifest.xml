@@ -36,6 +36,8 @@
         </activity>
         <activity android:name="com.example.neverkillmyplant.test.DiagHyd" >
         </activity>
+        <activity android:name="com.example.neverkillmyplant.test.DiagSec" >
+        </activity>
         <activity android:name="com.example.neverkillmyplant.test.DefaultPage" >
         </activity>
         <activity android:name="com.example.neverkillmyplant.test.DisplayBitmap" >

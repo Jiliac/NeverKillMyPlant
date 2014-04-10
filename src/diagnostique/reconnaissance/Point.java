@@ -25,7 +25,7 @@ public class Point {
 	public boolean equal(Point p) {
 		if (this.grIn == p.getGrIn() && this.grOut == p.getGrOut())
 			return true;
-		else if(this.grIn == p.getGrOut() && this.grOut == p.getGrIn())
+		else if (this.grIn == p.getGrOut() && this.grOut == p.getGrIn())
 			return true;
 		else
 			return false;
@@ -45,6 +45,17 @@ public class Point {
 
 	public void setEtiquette(int etiquette) {
 		this.etiquette = etiquette;
+	}
+
+	/************ passage pixel -> point *********/
+	public static Point[][] convertisseur(Pixel[][] pixels) {
+		Point[][] retour = new Point[pixels.length][pixels[0].length];
+		for (int x = 0; x < pixels.length; x++) {
+			for (int y = 0; y < pixels[0].length; y++) {
+				retour[x][y] = new Point(x, y, pixels[x][y]);
+			}
+		}
+		return retour;
 	}
 
 	/************* getter **********/

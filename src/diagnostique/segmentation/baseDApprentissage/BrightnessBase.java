@@ -5,7 +5,21 @@ import diagnostique.segmentation.Pixel;
 
 public class BrightnessBase extends ArrayList<Pixel> {
 	public BrightnessBase(){
-		this(20);
+		//this(20);
+		
+		Pixel p = new Pixel(0f,0f,0.1f);
+		p.setGroupe(0);
+		this.add(p);
+		
+		p = new Pixel(0f,0f,0.3f);
+		p.setGroupe(1);
+		this.add(p);
+		
+		
+		
+		p = new Pixel(0f,0f,0.6f);
+		p.setGroupe(2);
+		this.add(p);
 	}
 	
 	public BrightnessBase(int parametre) {

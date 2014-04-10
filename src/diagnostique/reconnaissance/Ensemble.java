@@ -32,7 +32,6 @@ public class Ensemble {
 		this.premiereEntree = premiereEntree;
 		premiereCollection = new ArrayList<Point>();
 
-		this.mainAlgo();
 	}
 
 	/**************** premiere etage de developpement *******************/
@@ -40,7 +39,7 @@ public class Ensemble {
 	private ArrayList<Collection> ensemble = new ArrayList<Collection>();
 	private ArrayList<Collection> newEnsemble = new ArrayList<Collection>();
 
-	public void mainAlgo() {
+	public ArrayList<Collection> CompoCo() {
 		// pour la detection de jaunissement
 		int compteurJaunePix = 0;
 
@@ -109,7 +108,7 @@ public class Ensemble {
 		if (Global.supprimer) {
 			for (int i = 0; i < size; i++) {
 				Collection collec = newEnsemble.get(i);
-				if (collec.size() < 20 || collec.getRayon() > width / 5
+				if (collec.size() < 50 || collec.getRayon() > width / 5
 						|| collec.getRayon() > height / 5
 						|| collec.getEcartType() > 2)
 					aSupprimer.add(collec);
@@ -147,6 +146,7 @@ public class Ensemble {
 			if (collec.size() != 0)
 				System.out.println(collec);
 		System.out.println("fini");
+		return newEnsemble;
 	}
 
 	/********* deuxieme etage de developpement *************/
@@ -176,12 +176,6 @@ public class Ensemble {
 				for (Point voisin : voisins)
 					aAjouter.add(voisin.getEtiquette());
 				listeEqui.add(aAjouter);
-
-				// debug
-				if (listeEqui.size() == 2)
-					System.out.println("debug");
-
-				System.out.print("");
 			}
 
 			// fin de boucle
