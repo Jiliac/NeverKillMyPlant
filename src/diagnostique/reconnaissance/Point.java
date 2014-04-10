@@ -14,7 +14,7 @@ public class Point {
 
 	public Point(int x, int y, Pixel pixel) {
 		this(x, y);
-		this.grOut = pixel.getnumGroupe();
+		this.grOut = pixel.getGroupe();
 	}
 
 	public Point(int x, int y) {

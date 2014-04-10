@@ -20,6 +20,8 @@ public class DiagHydra {
 
 	public DiagHydra(Bitmap img) {
 		this.img = img;
+		int width = img.getWidth(), height = img.getHeight();
+		img = Bitmap.createBitmap(img, 0, height / 3, width, height / 3);
 		this.go();
 	}
 

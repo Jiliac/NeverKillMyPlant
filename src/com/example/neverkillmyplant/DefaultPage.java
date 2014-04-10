@@ -13,6 +13,6 @@ public class DefaultPage extends Activity {
 		setContentView(R.layout.diagfer);
 
 		TextView text = (TextView) findViewById(R.id.textView1);
-		text.setText("probleme");
+		text.setText("Aucune maladie n'a pu etre diagnostiquee.");
 	}
 }

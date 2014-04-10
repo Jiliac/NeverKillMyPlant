@@ -1,5 +1,7 @@
 package com.example.neverkillmyplant;
 
+import java.util.Calendar;
+
 import javaClass.Plant;
 import javaClass.PlantArray;
 import android.app.Activity;
@@ -61,24 +63,35 @@ public class AddPlantActivity extends Activity implements View.OnClickListener {
 		Plant plant = new Plant(name, textespece, textSticker);
 
 		// sauvegarde de cette plante
-		if (name != "") {
+		if (name.length()>0){
 			PlantArray planteListe = new PlantArray("liste.data");
 			plant.setId(planteListe.size());
 			planteListe.add(plant);
 			planteListe.save("liste.data");
 		}
-		
+
 		// on crée l'alarme concernant cette plante
 		setAlarm(plant);
-		
+
 		finish();
 	}
-	
-	private void setAlarm(Plant plant){
-		Intent i = new Intent(getApplicationContext(),CheckHealth.class);
-		i.putExtra("plant",(Parcelable)plant);
-		PendingIntent pi = PendingIntent.getService(getApplicationContext(), 0, i, 0);
+
+	private void setAlarm(Plant plant) {
+		// get today date
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		c.set(Calendar.HOUR, 12);
+		int today = c.get(Calendar.DAY_OF_WEEK);
+		c.set(Calendar.DAY_OF_WEEK, today + 1);
+
+		// set alarm
+		Intent i = new Intent(getApplicationContext(), CheckHealth.class);
+		i.putExtra("plant", (Parcelable) plant);
+		PendingIntent pi = PendingIntent.getService(getApplicationContext(), 0,
+				i, 0);
 		AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
-		manager.setRepeating(AlarmManager.RTC, System.currentTimeMillis(),AlarmManager.INTERVAL_HALF_DAY, pi);
+		manager.setRepeating(AlarmManager.RTC, c.getTimeInMillis(),
+				AlarmManager.INTERVAL_HALF_DAY, pi);
 	}
 }

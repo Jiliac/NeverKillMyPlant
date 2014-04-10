@@ -9,8 +9,8 @@ package com.example.neverkillmyplant;
 
 public final class R {
     public static final class array {
-        public static final int plantType=0x7f060000;
-        public static final int sticker=0x7f060001;
+        public static final int plantType=0x7f070000;
+        public static final int sticker=0x7f070001;
     }
     public static final class attr {
     }
@@ -27,8 +27,9 @@ public final class R {
     public static final class drawable {
         public static final int ficus=0x7f020000;
         public static final int ic_launcher=0x7f020001;
-        public static final int testfer=0x7f020002;
-        public static final int testhydra=0x7f020003;
+        public static final int nkmp_background_image=0x7f020002;
+        public static final int testfer=0x7f020003;
+        public static final int testhydra=0x7f020004;
     }
     public static final class id {
         public static final int action_settings=0x7f09000e;
@@ -60,15 +61,15 @@ public final class R {
         public static final int main=0x7f080000;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
-        public static final int add=0x7f050004;
-        public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f050002;
-        public static final int hintAdd=0x7f050003;
-        public static final int photo=0x7f050005;
-        public static final int retour=0x7f050006;
-        public static final int testDiag=0x7f050007;
-        public static final int testHydra=0x7f050008;
+        public static final int action_settings=0x7f060001;
+        public static final int add=0x7f060004;
+        public static final int app_name=0x7f060000;
+        public static final int hello_world=0x7f060002;
+        public static final int hintAdd=0x7f060003;
+        public static final int photo=0x7f060005;
+        public static final int retour=0x7f060006;
+        public static final int testDiag=0x7f060007;
+        public static final int testHydra=0x7f060008;
     }
     public static final class style {
         /** 
@@ -92,10 +93,11 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f050001;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
+        public static final int AppTheme=0x7f050002;
+        public static final int holo=0x7f050000;
     }
 }

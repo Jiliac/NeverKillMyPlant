@@ -142,14 +142,6 @@ public class PlantCard extends Activity implements View.OnClickListener {
 		});
 	}
 
-	private void analyse(String fileName) {
-		DiagHydra dh = new DiagHydra(fileName);
-		if (dh.diagnostique() != null) {
-			Intent diag = new Intent(PlantCard.this, dh.diagnostique());
-			startActivity(diag);
-		}
-	}
-
 	private void analyse(Bitmap img) {
 		DiagHydra dh = new DiagHydra(img);
 		if (dh.diagnostique() != null) {
@@ -165,9 +157,9 @@ public class PlantCard extends Activity implements View.OnClickListener {
 		if (requestCode == TAKE_PICTURE && resultCode == RESULT_OK
 				&& data != null) {
 			Bundle extras = data.getExtras();
+			
 			img = (Bitmap) extras.get("data");
 			this.analyse(img);
-
 		}
 	}
 

@@ -10,7 +10,7 @@ public class Global {
 	public final static int isVoisin = 2;
 	public final static boolean supprimer = false;
 	public final static ArrayList<Pixel> baseDApprentissage = new BrightnessBase();
-	public final static Distance distance = new DistanceHue();
+	public final static Distance distance = new DistanceBrightness();
 	public final static boolean afficherCercle = false;
 
 	public final static boolean compterZones = true;

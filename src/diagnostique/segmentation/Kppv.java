@@ -34,7 +34,7 @@ public class Kppv {
 		// on decide le groupe du pixel
 		float groupe = 0;
 		for (Pixel pixel : kVoisins) {
-			groupe += pixel.getnumGroupe();
+			groupe += pixel.getGroupe();
 		}
 		groupe = groupe / k;
 		if (groupe < ((int) groupe) + .5)

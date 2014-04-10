@@ -6,6 +6,7 @@ import javaClass.clickPlantButton;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -20,15 +21,17 @@ public class MainActivity extends Activity {
 		// Creation de la page de base
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		// les boutons ont besoin d'être réaffiché.
 		planteListe = new PlantArray();
 		plantesAffichees = new PlantArray();
 		plantesAffichees.save("affichage.data");
 
-
 		// on set la methode du bouton add
 		Button addPlanButton = (Button) findViewById(R.id.button1);
+		Typeface FONT = Typeface.createFromAsset(getAssets(),
+				"fonts/MoonFlower.ttf");
+		addPlanButton.setTypeface(FONT);
 		addPlanButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -74,6 +77,9 @@ public class MainActivity extends Activity {
 				A.addView(bouton);
 				// on va vers la fiche de la plante lors du click
 				bouton.setOnClickListener(new clickPlantButton(plant, this));
+				Typeface FONT = Typeface.createFromAsset(getAssets(),
+						"fonts/MoonFlower.ttf");
+				bouton.setTypeface(FONT);
 			}
 		}
 		layoutOfDynamicContent.addView(A);

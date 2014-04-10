@@ -32,7 +32,7 @@ public class CheckHealth extends IntentService {
 		// récupère la plante dont on crée le service
 		plant = (Plant) startIntent.getParcelableExtra("plant");
 
-		String adresse = null; // à faire à partir de la plante...
+		String adresse = "https://www.google.fr/"; // à faire à partir de la plante...
 		String retour = getRetourServeur(adresse);
 
 		// CREATION ET ENVOI DE LA NOTIF
@@ -61,7 +61,7 @@ public class CheckHealth extends IntentService {
 	}
 
 	/* variable pour le test des notifications */
-	public int ID_NOTIFICATION = 0;
+	public static int ID_NOTIFICATION = 0;
 
 	private void notificationCreator() {
 		Intent notificationIntent = new Intent(CheckHealth.this,

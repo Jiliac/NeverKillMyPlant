@@ -80,12 +80,22 @@ public class Pixel {
 				color.getBlue(), null);
 		return hsb[2];
 	}
+	
+	public void setBrightness(float br) {
+		color = new Colour(Colour.HSBtoRGB(hue, this.getSaturation(), br));
+
+		this.r = color.getRed();
+		this.g = color.getGreen();
+		this.b = color.getBlue();
+
+		this.hue = Colour.RGBtoHSB(r, g, b, null)[0];
+	}
 
 	public void setGroupe(int newnum) {
 		this.numgroupe = newnum;
 	}
 
-	public int getnumGroupe() {
+	public int getGroupe() {
 		return this.numgroupe;
 	}
 

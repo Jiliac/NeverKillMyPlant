@@ -29,10 +29,10 @@ public class DiagMainClass {
 				analyse.kppv(pixel);
 
 				// on affiche le resultat de la segmentation
-				System.out.println(pixel.getnumGroupe());
-				if (pixel.getnumGroupe() > 0) {
+				System.out.println(pixel.getGroupe());
+				if (pixel.getGroupe() > 0) {
 					Colour newColor = baseDApprentissage.get(
-							pixel.getnumGroupe() - 1).getColor();
+							pixel.getGroupe() - 1).getColor();
 					int rgb = newColor.getRGB();
 					img.setPixel(x, y, Colour.RGBtoARGB(rgb));
 				}
