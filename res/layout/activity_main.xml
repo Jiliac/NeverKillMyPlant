@@ -28,14 +28,12 @@
         android:orientation="vertical" >
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/listView1"
+    <ExpandableListView
+        android:id="@+id/expandableListView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" >
-    </ListView>
-
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="70dp" >
+    </ExpandableListView>
 
 </RelativeLayout>

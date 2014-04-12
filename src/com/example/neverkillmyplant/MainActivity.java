@@ -2,7 +2,10 @@ package com.example.neverkillmyplant;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import javaClass.ExpandableListAdapter;
 import javaClass.Plant;
 import javaClass.PlantArray;
 import javaClass.clickPlantButton;
@@ -10,14 +13,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.Menu;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 public class MainActivity extends Activity {
 	private PlantArray planteListe;
@@ -62,14 +62,13 @@ public class MainActivity extends Activity {
 
 	public void onResume() {
 		super.onResume();
-		
+
 		planteListe.load("neverkillmyplant" + File.separator + "liste.data");
-		/*
-		plantesAffichees.load("neverkillmyplant" + File.separator
-				+ "affichage.data");
-		this.ajoutBouton();
-		*/
-		handleListView((ListView) findViewById(R.id.listView1));
+		
+		 plantesAffichees.load("neverkillmyplant" + File.separator +
+		 "affichage.data"); this.ajoutBouton();
+		
+		handleListView((ExpandableListView) findViewById(R.id.expandableListView1));
 	}
 
 	/************************** methode auxiliaires ******************/
@@ -100,30 +99,27 @@ public class MainActivity extends Activity {
 	}
 
 	// TEST DES LISTVIEW
-	public void handleListView(ListView view) {
-		// creation des données
-		ArrayList<String> strs = new ArrayList<String>();
-		for (Plant plant : planteListe)
-			strs.add(plant.getName());
-
-		// creation de l'adapteur
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, strs);
-
-		// on associe la listview et l'adapter
+	public void handleListView(ExpandableListView view) {
+		ArrayList<String> titres = new ArrayList<String>();
+		HashMap<String, List<String>> fils = new HashMap<String, List<String>>();
+		
+		titres.add("premier titre");
+		titres.add("second titre");
+		
+		List<String> premier = new ArrayList<String>();
+		premier.add("1.1");
+		premier.add("1.2");
+		
+		List<String> second = new ArrayList<String>();
+		second.add("2.1");
+		second.add("2.2");
+		
+		fils.put("premier titre", premier);
+		fils.put("second titre", second);
+		
+		
+		ExpandableListAdapter adapter = new ExpandableListAdapter(this,titres,fils);
 		view.setAdapter(adapter);
-
-		// on definie ce qu'il ce passe lorsqu'on appuie sur un element
-		view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			public void onItemClick(AdapterView<?> adapter, View view,
-					int position, long id) {
-				Plant plant = planteListe.get(position);
-				Intent intent = new Intent(MainActivity.this, PlantCard.class);
-				intent.putExtra("plant", (Parcelable) plant);
-				startActivity(intent);
-			}
-
-		});
 	}
 
 	// methode de debug
