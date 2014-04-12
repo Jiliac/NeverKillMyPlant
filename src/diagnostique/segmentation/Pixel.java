@@ -1,7 +1,5 @@
 package diagnostique.segmentation;
 
-import diagnostique.segmentation.distance.*;
-
 public class Pixel {
 
 	private int numgroupe = -1;
@@ -51,17 +49,11 @@ public class Pixel {
 
 	/*********** le calcul de distance *****************/
 
-	private Distance distance = new DistanceBrightness();
-
 	public double distance(Pixel p) {
-		return distance.distance(this, p);
+		return Global.distance.distance(this, p);
 	}
 
 	/*************** getters et setters **************/
-
-	public void setDistance(Distance distance) {
-		this.distance = distance;
-	}
 
 	public float getHue() {
 		float hsb[] = Colour.RGBtoHSB(color.getRed(), color.getGreen(),

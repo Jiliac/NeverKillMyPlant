@@ -1,7 +1,6 @@
 package com.example.neverkillmyplant;
 
 import java.io.File;
-import java.io.IOException;
 import javaClass.Plant;
 
 import org.apache.http.HttpEntity;
@@ -11,22 +10,22 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-import com.example.neverkillmyplant.test.DiagnostiqueActivity;
-
-import diagnostique.segmentation.intervalle.DiagHydra;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.view.View;
+
+import com.example.neverkillmyplant.test.DiagnostiqueActivity;
+
+import diagnostique.xiao.Xiao;
 
 public class PlantCard extends Activity implements View.OnClickListener {
 
@@ -36,6 +35,8 @@ public class PlantCard extends Activity implements View.OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.plant_card_activity);
+		Typeface FONT = Typeface.createFromAsset(getAssets(),
+				"fonts/MoonFlower.ttf");
 
 		// definition du bouton retour
 		Button retour = (Button) findViewById(R.id.button1);
@@ -59,11 +60,14 @@ public class PlantCard extends Activity implements View.OnClickListener {
 		// et on definit la TextView
 		TextView plantName = (TextView) findViewById(R.id.textView1);
 		plantName.setText(plant.getName());
+		plantName.setTypeface(FONT);
 		TextView plantEspece = (TextView) findViewById(R.id.textView2);
 		plantEspece.setText(plant.getEspece());
+		plantEspece.setTypeface(FONT);
 		TextView santePlant = (TextView) findViewById(R.id.textView3);
-		//getSantePlant(santePlant,
-		//"http://89.156.29.238:8080/rpztix/plants/1/sante?method=plain");
+		santePlant.setTypeface(FONT);
+		// getSantePlant(santePlant,
+		// "http://89.156.29.238:8080/rpztix/plants/1/sante?method=plain");
 	}
 
 	/******************** recupere la sante d'une plante sur le serveur *****************/
@@ -128,24 +132,16 @@ public class PlantCard extends Activity implements View.OnClickListener {
 			public void onClick(View v) {
 				Intent cameraIntent = new Intent(
 						MediaStore.ACTION_IMAGE_CAPTURE);
-				/*
-				String file = dir + "photo.jpg";
-				File newfile = new File(file);
-				try {
-					newfile.createNewFile();
-				} catch (IOException e) {
-				}
-				Uri outputFileUri = Uri.fromFile(newfile);
-				
-				cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-				*/
 				startActivityForResult(cameraIntent, TAKE_PICTURE);
 			}
 		});
+		Typeface FONT = Typeface.createFromAsset(getAssets(),
+				"fonts/MoonFlower.ttf");
+		photo.setTypeface(FONT);
 	}
 
 	private void analyse(Bitmap img) {
-		DiagHydra dh = new DiagHydra(img);
+		Xiao dh = new Xiao(img);
 		if (dh.diagnostique() != null) {
 			Intent diag = new Intent(PlantCard.this, dh.diagnostique());
 			startActivity(diag);
@@ -159,7 +155,7 @@ public class PlantCard extends Activity implements View.OnClickListener {
 		if (requestCode == TAKE_PICTURE && resultCode == RESULT_OK
 				&& data != null) {
 			Bundle extras = data.getExtras();
-			
+
 			img = (Bitmap) extras.get("data");
 			this.analyse(img);
 		}

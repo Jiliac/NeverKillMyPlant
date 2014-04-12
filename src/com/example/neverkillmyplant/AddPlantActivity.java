@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Typeface;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,9 +27,12 @@ public class AddPlantActivity extends Activity implements View.OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_plant);
+		Typeface FONT = Typeface.createFromAsset(getAssets(),
+				"fonts/MoonFlower.ttf");
 
-		Button addPlanButton = (Button) findViewById(R.id.button1);
-		addPlanButton.setOnClickListener(this);
+		Button addPlantButton = (Button) findViewById(R.id.button1);
+		addPlantButton.setOnClickListener(this);
+		addPlantButton.setTypeface(FONT);
 
 		espece = (Spinner) findViewById(R.id.spinner1);
 		sticker = (Spinner) findViewById(R.id.spinner2);
@@ -64,11 +68,13 @@ public class AddPlantActivity extends Activity implements View.OnClickListener {
 		Plant plant = new Plant(name, textespece, textSticker);
 
 		// sauvegarde de cette plante
-		if (name.length()>0){
-			PlantArray planteListe = new PlantArray("neverkillmyplant"+File.separator + "liste.data");
+		if (name.length() > 0) {
+			PlantArray planteListe = new PlantArray("neverkillmyplant"
+					+ File.separator + "liste.data");
 			plant.setId(planteListe.size());
 			planteListe.add(plant);
-			planteListe.save("neverkillmyplant"+File.separator +"liste.data");
+			planteListe
+					.save("neverkillmyplant" + File.separator + "liste.data");
 		}
 
 		// on crée l'alarme concernant cette plante

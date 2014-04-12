@@ -53,7 +53,7 @@ public class Kmoyenne {
 		boolean tests[] = new boolean[size];
 		int i = 0;
 		for (Pixel centroide : centroides) {
-			if (centroide.distance(base.get(i)) < 0.05)
+			if (centroide.distance(base.get(i)) < Global.conditionDArret)
 				tests[i] = true;
 			else
 				tests[i] = false;
@@ -80,12 +80,12 @@ public class Kmoyenne {
 	 ********/
 
 	private Pixel[] setCentroide(Pixel[][] pixels) {
-		if (Global.distance instanceof DistanceBrightness)
+		if (Global.distance instanceof DistanceBrightness
+				|| Global.distance instanceof DistanceNG)
 			return this.setCentroBrightness(pixels);
 		else if (Global.distance instanceof DistanceHue)
 			return this.setCentroHue(pixels);
-		else if (Global.distance instanceof DistanceCarre
-				|| Global.distance instanceof DistanceNG)
+		else if (Global.distance instanceof DistanceCarre)
 			return this.setCentroRGB(pixels);
 		else
 			return null;

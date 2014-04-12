@@ -108,9 +108,8 @@ public class Ensemble {
 		if (Global.supprimer) {
 			for (int i = 0; i < size; i++) {
 				Collection collec = newEnsemble.get(i);
-				if (collec.size() < 50 || collec.getRayon() > width / 5
-						|| collec.getRayon() > height / 5
-						|| collec.getEcartType() > 2)
+				if (Global.supression(collec.size(), collec.getRayon(), width,
+						height, collec.getEcartType()))
 					aSupprimer.add(collec);
 			}
 		} else {
