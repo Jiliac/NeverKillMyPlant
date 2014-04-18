@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
 		handleListView((ExpandableListView) findViewById(R.id.expandableListView1));
 	}
 
-	/************************** methode auxiliaires ******************/
+	/************************** methode auxiliaires ************************/
 
 	public void ajoutBouton() {
 		// on crée dynamiquement un bouton par l'intermédiaire d'un layout
@@ -101,18 +101,19 @@ public class MainActivity extends Activity {
 	// TEST DES LISTVIEW
 	public void handleListView(ExpandableListView view) {
 		ArrayList<String> titres = new ArrayList<String>();
-		HashMap<String, List<String>> fils = new HashMap<String, List<String>>();
+		HashMap<String, List<String[]>> fils = new HashMap<String, List<String[]>>();
 		
 		titres.add("premier titre");
 		titres.add("second titre");
 		
-		List<String> premier = new ArrayList<String>();
-		premier.add("1.1");
-		premier.add("1.2");
+		List<String[]> premier = new ArrayList<String[]>();
+		String[] str1 = {"ADRESSE","1.1","1.2"};
+		premier.add(str1);
 		
-		List<String> second = new ArrayList<String>();
-		second.add("2.1");
-		second.add("2.2");
+		
+		List<String[]> second = new ArrayList<String[]>();
+		String[] str2 = {"ADRESSE","2.1","2.2"};
+		second.add(str2);
 		
 		fils.put("premier titre", premier);
 		fils.put("second titre", second);
@@ -121,6 +122,8 @@ public class MainActivity extends Activity {
 		ExpandableListAdapter adapter = new ExpandableListAdapter(this,titres,fils);
 		view.setAdapter(adapter);
 	}
+	
+	/********************************************************************************/
 
 	// methode de debug
 	public void reset() {
