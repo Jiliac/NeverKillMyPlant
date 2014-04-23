@@ -5,20 +5,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.example.neverkillmyplant.test.DiagnostiqueActivity;
+
+import diagnostique.xiao.Xiao;
+
 import javaClass.ExpandableListAdapter;
 import javaClass.Plant;
 import javaClass.PlantArray;
-import javaClass.clickPlantButton;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.Menu;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
-import android.widget.LinearLayout;
+
 
 public class MainActivity extends Activity {
 	private PlantArray planteListe = new PlantArray();
@@ -47,6 +51,12 @@ public class MainActivity extends Activity {
 				startActivity(add);
 			}
 		});
+		
+		// ajout d'un bouton pour le module diagnostique
+		ajoutBoutonDiagnostique();
+		
+		// bouton provisoire pour test
+		boutonTestCentroide();
 	}
 
 	/******* cycle de vie *********/
@@ -62,6 +72,23 @@ public class MainActivity extends Activity {
 		planteListe.load("neverkillmyplant" + File.separator + "liste.data");
 		handleListView((ExpandableListView) findViewById(R.id.expandableListView1));
 	}
+	
+	/************** bouton test centroide ******************/
+	
+	private void boutonTestCentroide(){
+		Button testCentro = (Button) findViewById(R.id.button3);
+		testCentro.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent toto = new Intent(MainActivity.this, DiagnostiqueActivity.class);
+				startActivity(toto);	
+			}
+		});
+	}
+	
+	
+	/************** methode pour les listView ****************/
 
 	public void handleListView(ExpandableListView view) {
 		ArrayList<String> titres = new ArrayList<String>();
@@ -84,9 +111,59 @@ public class MainActivity extends Activity {
 				fils);
 		view.setAdapter(adapter);
 	}
+	
+	/************************************** bouton diagnostique **********************/
+	
+	static int TAKE_PICTURE = 1;
+	String file;
+	Bitmap img;
 
+	
+	private void ajoutBoutonDiagnostique() {
+		// on créer le dossier de reception
+		final String dir = Environment
+				.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+				+ "/picFolder/";
+		File newdir = new File(dir);
+		newdir.mkdirs();
+
+		Button photo = (Button) findViewById(R.id.button2);
+		photo.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Intent cameraIntent = new Intent(
+						MediaStore.ACTION_IMAGE_CAPTURE);
+				startActivityForResult(cameraIntent, TAKE_PICTURE);
+			}
+		});
+		Typeface FONT = Typeface.createFromAsset(getAssets(),
+				"fonts/MoonFlower.ttf");
+		photo.setTypeface(FONT);
+	}
+
+	private void analyse(Bitmap img) {
+		Xiao dh = new Xiao(img);
+		if (dh.diagnostique() != null) {
+			Intent diag = new Intent(this, dh.diagnostique());
+			startActivity(diag);
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (requestCode == TAKE_PICTURE && resultCode == RESULT_OK
+				&& data != null) {
+			Bundle extras = data.getExtras();
+
+			img = (Bitmap) extras.get("data");
+			this.analyse(img);
+		}
+	}
+	
+	
 	/********************************************************************************/
-
+	
 	// methode de debug
 	public void reset() {
 		planteListe = new PlantArray();

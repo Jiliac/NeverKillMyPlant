@@ -23,7 +23,6 @@ import diagnostique.segmentation.Colour;
 import diagnostique.segmentation.Global;
 import diagnostique.segmentation.Kmoyenne;
 import diagnostique.segmentation.Pixel;
-import diagnostique.segmentation.intervalle.DiagHydra;
 import diagnostique.xiao.Xiao;
 
 public class DiagnostiqueActivity extends Activity {
@@ -61,19 +60,36 @@ public class DiagnostiqueActivity extends Activity {
 		Button testCentroide = (Button) findViewById(R.id.button1);
 		testCentroide.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
-				Bitmap img = analyse();
-				Ensemble ens = new Ensemble(img, Point.convertisseur(pixels));
-				ArrayList<Collection> compoCo = ens.CompoCo();
+
+				/*
+				 * Bitmap img = analyse(); Ensemble ens = new Ensemble(img,
+				 * Point.convertisseur(pixels)); ArrayList<Collection> compoCo =
+				 * ens.CompoCo();
+				 */
+				
+				String str = Environment.getExternalStorageDirectory()
+						.getAbsolutePath()
+						+ File.separator
+						+ "neverkillmyplant"
+						+ File.separator + "testCentroide.jpg";
+				Bitmap img = BitmapFactory.decodeFile(str);
+
+				Kmoyenne kmoyenne = new Kmoyenne(Global.baseDApprentissage, img);
+				Pixel[][] pixels = kmoyenne.analyse();
+
+				Ensemble ensemble = new Ensemble(img, Point
+						.convertisseur(pixels));
+				ArrayList<Collection> alc = ensemble.CompoCo();
 
 				// affichage des compoCo
-				Bitmap result = afficherCompoCo(img, compoCo);
-				
+				Bitmap result = afficherCompoCo(img, alc);
+
 				// on affiche le résultat du test
 				Intent display = new Intent(DiagnostiqueActivity.this,
 						DisplayBitmap.class);
 				display.putExtra("image", img);
 				display.putExtra("resultat", result);
-				
+
 				startActivity(display);
 			}
 

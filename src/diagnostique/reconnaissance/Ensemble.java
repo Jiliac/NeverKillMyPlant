@@ -1,14 +1,9 @@
 package diagnostique.reconnaissance;
 
 import java.util.ArrayList;
-
-import com.example.neverkillmyplant.test.DefaultPage;
-import com.example.neverkillmyplant.test.DiagFer;
-import com.example.neverkillmyplant.test.DiagHyd;
-
-import android.graphics.Bitmap;
 import diagnostique.segmentation.Global;
-import diagnostique.reconnaissance.ListeEqui;
+import android.graphics.Bitmap;
+
 
 public class Ensemble {
 	private Class diag = null;
@@ -102,14 +97,19 @@ public class Ensemble {
 		 * on enleve les collections de rayon trop grand et les collection
 		 * d'ecart type trop grand
 		 */
+		
+		// on reforme les collections
+		for(Collection collec : newEnsemble)
+			collec.reSetPoint();
 
 		ArrayList<Collection> aSupprimer = new ArrayList<Collection>();
 		int size = newEnsemble.size();
 		if (Global.supprimer) {
 			for (int i = 0; i < size; i++) {
 				Collection collec = newEnsemble.get(i);
-				if (Global.supression(collec.size(), collec.getRayon(), width,
-						height, collec.getEcartType()))
+				if (collec.size() < Global.MINSIZE || collec.getRayon() > width / 5
+						|| collec.getRayon() > height / 5
+						|| collec.getEcartType() > Global.ECARTYPE)
 					aSupprimer.add(collec);
 			}
 		} else {
@@ -123,7 +123,7 @@ public class Ensemble {
 		for (Collection collec : aSupprimer)
 			newEnsemble.remove(collec);
 
-		// pour compter l'air d'une région
+		// pour compter l'air d'une rï¿½gion
 		if (Global.compterZones) {
 			int compteur = 0;
 			for (Collection collec : newEnsemble)
@@ -131,20 +131,13 @@ public class Ensemble {
 					compteur++;
 			System.out.println("Il y a " + compteur
 					+ " zone(s) de cet intervalle");
-			if (compteurJaunePix > this.height * this.width / 3) {
-				if (compteur < 3)
-					this.diag = DiagHyd.class;
-				else
-					this.diag = DiagFer.class;
-			} else
-				this.diag = DefaultPage.class;
 		}
 
 		// on imprime en console les collections selectionnees
-		for (Collection collec : newEnsemble)
-			if (collec.size() != 0)
+		if (Global.afficherCompoCo)
+			for (Collection collec : newEnsemble)
 				System.out.println(collec);
-		System.out.println("fini");
+		System.out.println("fini : " + newEnsemble.size());
 		return newEnsemble;
 	}
 
@@ -201,44 +194,6 @@ public class Ensemble {
 			newCollec[ptSetEtiquette.getEtiquette()].add(ptSetEtiquette);
 		for (int i = 0; i <= maxEtiquette; i++)
 			newEnsemble.add(newCollec[i]);
-	}
-
-	private void composantesConnexes(Collection myCollec) {
-		/***************** analyse ***************/
-
-		Collection pointPasses = new Collection();
-		int maxEtiquette = 0;
-		for (Point pointSetEtiquette : myCollec) {
-			pointSetEtiquette.setEtiquette(maxEtiquette);
-			// les voisin, qui ont le meme groupe ont la meme etiquette
-			for (Point pointRef : pointPasses) {
-				if (myCollec.isVoisin(pointSetEtiquette, pointRef)
-						&& pointRef.equal(pointSetEtiquette))
-					pointSetEtiquette.setEtiquette(pointRef);
-			}
-
-			if (pointSetEtiquette.getEtiquette() == maxEtiquette)
-				maxEtiquette++;
-			pointPasses.add(pointSetEtiquette);
-		}
-
-		/******** scinder les collections *******/
-
-		// initialise
-		Collection myCollecScinde[] = new Collection[maxEtiquette + 1];
-		for (int i = 0; i <= maxEtiquette; i++)
-			myCollecScinde[i] = new Collection();
-
-		// ajout
-		for (Point point : myCollec) {
-			myCollecScinde[point.getEtiquette()].add(point);
-		}
-
-		// on ajoute le resultat de l'analyse
-		for (Collection collec : myCollecScinde)
-			if (collec.size() > 5)
-				newEnsemble.add(collec);
-
 	}
 
 	private Collection collectionExistance(Point point) {

@@ -7,8 +7,6 @@ public class Collection extends ArrayList<Point> {
 
 	/*********** analyse d'une collection *************/
 	public double getEcartType() {
-		if (this.size() == 0)
-			return Double.MAX_VALUE;
 		double sommeCarreRayon = 0;
 		Point centre = this.getCentre();
 		for (Point point : this)
@@ -32,8 +30,6 @@ public class Collection extends ArrayList<Point> {
 	}
 
 	public double getRayon() {
-		if (this.size() == 0)
-			return 0;
 		double sommeRayon = 0;
 		Point centre = this.getCentre();
 		for (Point point : this)
@@ -50,6 +46,38 @@ public class Collection extends ArrayList<Point> {
 	}
 
 	/************ traitement des collections **********/
+
+	public void reSetPoint() { // on fait le tour et on prend les points les
+								// plus éloignés
+		if (this.size() != 0) {
+			Point centre = this.getCentre();
+
+			Point[] signature = new Point[90];
+			for (int i = 0; i < 90; i++)
+				signature[i] = centre;
+
+			for (Point point : this) {
+				double rho = this.distance(point, centre);
+
+				double dx = point.getPosX() - centre.getPosX(), dy = point
+						.getPosY() - centre.getPosY();
+				double theta = 2 * Math.atan(dy / (dx + rho));
+				theta = Math.toDegrees(theta);
+				int angle = ((int) (theta - 0.5) + 1) % 360;
+				angle = (angle + 360) % 360;
+				angle = angle / 4;
+
+				Point ptPrecedent = signature[angle];
+				if (rho > this.distance(centre, ptPrecedent))
+					signature[angle] = point;
+			}
+
+			this.clear();
+			for (Point point : signature)
+				if (point != centre)
+					super.add(point);
+		}
+	}
 
 	public boolean equal(Point p) {
 		if (p.equal(this.get(0)))

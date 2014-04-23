@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -70,14 +71,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 				.findViewById(R.id.textView2);
 		String text2 = lesTextes[2];
 		textView2.setText(text2);
-
-		/*
-		 * final String childText = (String) getChild(groupPosition,
-		 * childPosition); TextView txtListChild = (TextView) convertView
-		 * .findViewById(R.id.lblListItem);
-		 * 
-		 * txtListChild.setText(childText);
-		 */
 
 		return convertView;
 	}
