@@ -16,7 +16,7 @@ public class Global {
 	public final static Distance distance = new DistanceBrightness();
 
 	public static double conditionDArret = 0.005;
-	public static double ECARTYPE = 2D;
+	public static double ECARTYPE = 1.7D;
 	public static int MINSIZE = 30;
 	public static boolean afficherCompoCo = false;
 }

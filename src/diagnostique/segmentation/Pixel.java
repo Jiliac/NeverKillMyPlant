@@ -26,17 +26,7 @@ public class Pixel {
 
 		this.hue = Colour.RGBtoHSB(r, g, b, null)[0];
 	}
-
-	public Pixel(float hue) {
-		color = new Colour(Colour.HSBtoRGB(hue, 1, 1));
-
-		this.r = color.getRed();
-		this.g = color.getGreen();
-		this.b = color.getBlue();
-
-		this.hue = Colour.RGBtoHSB(r, g, b, null)[0];
-	}
-
+	
 	public Pixel(float hue, float saturation, float brightness) {
 		color = new Colour(Colour.HSBtoRGB(hue, saturation, brightness));
 

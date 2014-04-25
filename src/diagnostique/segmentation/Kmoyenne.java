@@ -80,11 +80,8 @@ public class Kmoyenne {
 	 ********/
 
 	private Pixel[] setCentroide(Pixel[][] pixels) {
-		if (Global.distance instanceof DistanceBrightness
-				|| Global.distance instanceof DistanceNG)
+		if (Global.distance instanceof DistanceBrightness)
 			return this.setCentroBrightness(pixels);
-		else if (Global.distance instanceof DistanceHue)
-			return this.setCentroHue(pixels);
 		else if (Global.distance instanceof DistanceCarre)
 			return this.setCentroRGB(pixels);
 		else
@@ -114,10 +111,6 @@ public class Kmoyenne {
 		}
 
 		return centroides;
-	}
-
-	private Pixel[] setCentroHue(Pixel[][] pixels) {
-		return null;
 	}
 
 	private Pixel[] setCentroRGB(Pixel[][] pixels) {
