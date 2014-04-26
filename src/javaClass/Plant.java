@@ -44,6 +44,7 @@ public class Plant implements Parcelable, Externalizable {
 		this.espece = (String) input.readObject();
 		this.sticker = (String) input.readObject();
 		this.id = input.readInt();
+		this.photoFilePath = (String) input.readObject();
 	}
 
 	@Override
@@ -52,6 +53,7 @@ public class Plant implements Parcelable, Externalizable {
 		output.writeObject(espece);
 		output.writeObject(sticker);
 		output.writeInt(id);
+		output.writeObject(photoFilePath);
 	}
 
 	/***** getter *********/
@@ -96,4 +98,17 @@ public class Plant implements Parcelable, Externalizable {
 	public int describeContents() {
 		return 0;
 	}
+
+	/********* information de la plante sur la photo ********/
+
+	private String photoFilePath = "rien";
+
+	public String getPhotoFilePath() {
+		return photoFilePath;
+	}
+
+	public void setPhotoFilePath(String photoFilePath) {
+		this.photoFilePath = photoFilePath;
+	}
+
 }

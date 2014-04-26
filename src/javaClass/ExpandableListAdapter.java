@@ -1,22 +1,24 @@
 package javaClass;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.neverkillmyplant.R;
 
 //	CLASSE COPIER D'INTERNET
-public class ExpandableListAdapter extends BaseExpandableListAdapter {
+public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
 	private Context _context;
 	private List<String> _listDataHeader; // header titles
@@ -56,9 +58,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 		/***** l'imageView *****/
 		ImageView image = (ImageView) convertView.findViewById(R.id.imageView1);
 		String imageAdresse = lesTextes[0];
-		// au final ce sera l'adresse ou recupere l'image a afficher
-
-		// rien d'autre a faire pour le moment
+		if((new File(imageAdresse)).exists()){
+			Bitmap icone = BitmapFactory.decodeFile(imageAdresse);
+			image.setImageBitmap(icone);
+		}
 
 		/****** le premier texte *****/
 		TextView textView1 = (TextView) convertView
@@ -122,5 +125,5 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 	@Override
 	public boolean isChildSelectable(int groupPosition, int childPosition) {
 		return true;
-	}
+	}	
 }
