@@ -11,6 +11,7 @@ import javaClass.Plant;
 import javaClass.PlantArray;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -32,7 +33,12 @@ public class MainActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		// Creation de la page de base
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		int orientation = getResources().getConfiguration().orientation;
+		if(orientation == Configuration.ORIENTATION_PORTRAIT)
+			setContentView(R.layout.activity_main);
+		else
+			setContentView(R.layout.activity_main_hor);
+			
 
 		// cree le dossier de stockage si necessaire
 		createDirectory();

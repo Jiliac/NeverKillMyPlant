@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 
 import android.os.Bundle;
@@ -26,7 +27,12 @@ public class AddPlantActivity extends Activity implements View.OnClickListener {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.add_plant);
+		int orientation = getResources().getConfiguration().orientation;
+		if(orientation == Configuration.ORIENTATION_PORTRAIT)
+			setContentView(R.layout.add_plant);
+		else
+			setContentView(R.layout.add_plant_hor);
+		
 		Typeface FONT = Typeface.createFromAsset(getAssets(),
 				"fonts/MoonFlower.ttf");
 
