@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.example.neverkillmyplant.R;
 
-//	CLASSE COPIER D'INTERNET
 public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
 	private Context _context;

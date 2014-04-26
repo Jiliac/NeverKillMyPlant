@@ -128,7 +128,6 @@ public class MainActivity extends Activity implements
 			int groupPosition, int childPosition, long id) {
 
 		Plant plant = planteListe.get(groupPosition);
-		this.groupPosition = groupPosition + 2;
 
 		Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		final String dir = Environment
