@@ -67,7 +67,8 @@ public class MainActivity extends Activity implements
 		// bouton provisoire pour test
 		//boutonTestCentroide();
 		
-		Serveur.getSanteInBackground("https://www.google.fr/");
+		// pour lest test...
+		//Serveur.getSanteInBackground("https://www.google.fr/");
 	}
 
 	/******* cycle de vie *********/
