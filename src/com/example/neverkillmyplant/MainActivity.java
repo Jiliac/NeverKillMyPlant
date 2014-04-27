@@ -9,6 +9,7 @@ import java.util.List;
 import javaClass.ExpandableListAdapter;
 import javaClass.Plant;
 import javaClass.PlantArray;
+import javaClass.Serveur;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -64,7 +65,9 @@ public class MainActivity extends Activity implements
 		ajoutBoutonDiagnostique();
 
 		// bouton provisoire pour test
-		boutonTestCentroide();
+		//boutonTestCentroide();
+		
+		Serveur.getSanteInBackground("https://www.google.fr/");
 	}
 
 	/******* cycle de vie *********/
@@ -108,8 +111,8 @@ public class MainActivity extends Activity implements
 			List<String[]> plantAttributs = new ArrayList<String[]>();
 			String[] str = new String[3];
 			str[0] = plant.getPhotoFilePath();
-			str[1] = "Espece : " + plant.getEspece();
-			str[2] = "Sante : " + "A RECUPER";
+			str[1] = " Espece : " + plant.getEspece();
+			str[2] = " Sante : " + "bonne";
 			plantAttributs.add(str);
 
 			fils.put(plant.getName(), plantAttributs);

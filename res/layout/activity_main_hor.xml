@@ -21,7 +21,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/layout"
         android:layout_marginRight="47dp"
-        android:text="Diagnostique" />
+        android:text="Diagnostic" />
 
     <Button
         android:id="@+id/button1"
@@ -31,7 +31,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="18dp"
         android:text="@string/add" />
-
+	<!-- 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
         android:layout_alignRight="@+id/button2"
         android:layout_marginBottom="22dp"
         android:text="TestCentro" />
-
+ -->
     <ExpandableListView
         android:id="@+id/expandableListView1"
         android:layout_width="300dp"
