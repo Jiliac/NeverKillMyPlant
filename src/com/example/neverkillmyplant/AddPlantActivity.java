@@ -67,7 +67,7 @@ public class AddPlantActivity extends Activity implements View.OnClickListener {
 	public void addPlant() {
 		EditText et = (EditText) findViewById(R.id.editText1);
 		String name = et.getText().toString();
-
+		
 		// creation de la plante
 		String textSticker = sticker.getSelectedItem().toString();
 		String textespece = espece.getSelectedItem().toString();
@@ -89,22 +89,24 @@ public class AddPlantActivity extends Activity implements View.OnClickListener {
 		finish();
 	}
 
-	private void setAlarm(Plant plant) {
+	private void setAlarm(Plant plante) {
 		// get today date
 		Calendar c = Calendar.getInstance();
+		/*
 		c.set(Calendar.MINUTE, 0);
 		c.set(Calendar.SECOND, 0);
 		c.set(Calendar.HOUR, 12);
 		int today = c.get(Calendar.DAY_OF_WEEK);
 		c.set(Calendar.DAY_OF_WEEK, today + 1);
-
+		*/
+		
 		// set alarm
 		Intent i = new Intent(getApplicationContext(), CheckHealth.class);
-		i.putExtra("plant", (Parcelable) plant);
+		i.putExtra("plante", (Parcelable) plante);
 		PendingIntent pi = PendingIntent.getService(getApplicationContext(), 0,
 				i, 0);
 		AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
 		manager.setRepeating(AlarmManager.RTC, c.getTimeInMillis(),
-				AlarmManager.INTERVAL_HALF_DAY, pi);
+				AlarmManager.INTERVAL_DAY, pi);
 	}
 }

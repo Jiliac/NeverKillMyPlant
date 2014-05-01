@@ -6,20 +6,32 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javaClass.ComExt;
 import javaClass.ExpandableListAdapter;
 import javaClass.Plant;
 import javaClass.PlantArray;
 import javaClass.Serveur;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings.Secure;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 
@@ -28,18 +40,18 @@ import com.example.neverkillmyplant.test.DiagnostiqueActivity;
 import diagnostique.xiao.Xiao;
 
 public class MainActivity extends Activity implements
-		ExpandableListView.OnChildClickListener {
+		ExpandableListView.OnChildClickListener,
+		ExpandableListView.OnItemLongClickListener {
 	private PlantArray planteListe = new PlantArray();
 
 	protected void onCreate(Bundle savedInstanceState) {
 		// Creation de la page de base
 		super.onCreate(savedInstanceState);
 		int orientation = getResources().getConfiguration().orientation;
-		if(orientation == Configuration.ORIENTATION_PORTRAIT)
+		if (orientation == Configuration.ORIENTATION_PORTRAIT)
 			setContentView(R.layout.activity_main);
 		else
 			setContentView(R.layout.activity_main_hor);
-			
 
 		// cree le dossier de stockage si necessaire
 		createDirectory();
@@ -65,11 +77,13 @@ public class MainActivity extends Activity implements
 		ajoutBoutonDiagnostique();
 
 		// bouton provisoire pour test
-		//boutonTestCentroide();
-		
-		// pour lest test...
-		//Serveur.getSanteInBackground("https://www.google.fr/");
+		// boutonTestCentroide();
+
+		ComExt.setServeurURL("http://89.156.29.238:8080/");
+		Serveur.sendID();
 	}
+
+	// http://89.156.29.238:8080/
 
 	/******* cycle de vie *********/
 
@@ -113,7 +127,20 @@ public class MainActivity extends Activity implements
 			String[] str = new String[3];
 			str[0] = plant.getPhotoFilePath();
 			str[1] = " Espece : " + plant.getEspece();
-			str[2] = " Sante : " + "bonne";
+
+			String sante = Serveur.getSante(plant);
+			String printSante = "problem";
+			try {
+				int health = Integer.parseInt(sante);
+				if (health == 0)
+					printSante = "mauvaise";
+
+				else if (health == 1)
+					printSante = "bonne";
+			} catch (NumberFormatException e) {
+				printSante = "inconnue";
+			}
+			str[2] = " Sante : " + printSante;
 			plantAttributs.add(str);
 
 			fils.put(plant.getName(), plantAttributs);
@@ -124,9 +151,8 @@ public class MainActivity extends Activity implements
 
 		view.setAdapter(adapter);
 		view.setOnChildClickListener(this);
+		view.setOnItemLongClickListener(this);
 	}
-
-	private int groupPosition;
 
 	public boolean onChildClick(ExpandableListView parent, View v,
 			int groupPosition, int childPosition, long id) {
@@ -153,9 +179,22 @@ public class MainActivity extends Activity implements
 		Uri outputFileUri = Uri.fromFile(newfile);
 		cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
 
-		startActivityForResult(cameraIntent, this.groupPosition);
+		startActivity(cameraIntent);
 
 		return false;
+	}
+
+	public boolean onItemLongClick(AdapterView<?> parent, View v, int position,
+			long id) {
+
+		planteListe.load("neverkillmyplant" + File.separator + "liste.data");
+		Plant plantToRemove = planteListe.get(position);
+		planteListe.remove(plantToRemove);
+
+		planteListe.save("neverkillmyplant" + File.separator + "liste.data");
+		handleListView((ExpandableListView) findViewById(R.id.expandableListView1));
+
+		return true;
 	}
 
 	/************************************** bouton diagnostique **********************/
@@ -202,11 +241,6 @@ public class MainActivity extends Activity implements
 
 			img = (Bitmap) extras.get("data");
 			this.analyse(img);
-		} else if (requestCode == TAKE_PICTURE && resultCode == RESULT_OK
-				&& data != null) {
-			Bundle extras = data.getExtras();
-
-			img = (Bitmap) extras.get("data");
 		}
 	}
 
@@ -230,4 +264,5 @@ public class MainActivity extends Activity implements
 			appDirectory.mkdir();
 		}
 	}
+
 }

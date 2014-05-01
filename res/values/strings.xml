@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">NeverKillMyPlant</string>
+    <string name="app_name">NeverKillMyPlants</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="hintAdd">Entrer le nom de votre Plante</string>
@@ -9,11 +9,11 @@
     <string name="photo">Diagnostiquer</string><string name="retour">Retour</string>
     <string-array name="plantType">
         <item>Ficus</item>
-        <item>Autre</item>
+        <item>Rosier</item>
     </string-array> 
     <string-array name="sticker">
         <item>Sticker Jaune</item>
-        <item>Sticker Rouge</item>
+        <item>Sticker Noir</item>
     </string-array>
     <string name="testDiag">Diagnostique (test)</string>
     <string name="testHydra">Hydratation</string> 

@@ -80,6 +80,16 @@ public class PlantArray extends ArrayList<Plant> implements Externalizable {
 		return retour;
 	}
 
+	public String toString() {
+		String str = "";
+		int i = 0;
+		for (Plant plant : this) {
+			str += "plante(" + i + ") : " + plant.toString() + "\n";
+			i++;
+		}
+		return str;
+	}
+
 	/***** PlantArray est externalizable ********/
 	@Override
 	public void readExternal(ObjectInput arg0) throws IOException,

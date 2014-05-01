@@ -77,6 +77,10 @@ public class Plant implements Parcelable, Externalizable {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public String getSticker(){
+		return this.sticker;
+	}
 
 	/********* Plant est un parcelable ************/
 	public void writeToParcel(Parcel dest, int flags) {
@@ -109,6 +113,10 @@ public class Plant implements Parcelable, Externalizable {
 
 	public void setPhotoFilePath(String photoFilePath) {
 		this.photoFilePath = photoFilePath;
+	}
+	
+	public String toString(){
+		return this.getName();
 	}
 
 }
