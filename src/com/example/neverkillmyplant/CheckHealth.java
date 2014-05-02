@@ -21,15 +21,12 @@ public class CheckHealth extends IntentService {
 	protected void onHandleIntent(Intent startIntent) {
 		// récupère la plante dont on crée le service
 		Plant plante = (Plant) startIntent.getParcelableExtra("plant");
-		System.out.println("plante: " + plante);
 
-		String adresse = "https://www.google.fr/"; // à faire à partir de la
-													// plante...
-		//String retour = Serveur.getURL(adresse);
-
+		//String sante = Serveur.getSante(plante);
+				
 		// CREATION ET ENVOI DE LA NOTIF
 
-		// if(retour == "mauvaise")
+		//if(sante == "0")
 		notificationCreator(plante);
 		
 	}

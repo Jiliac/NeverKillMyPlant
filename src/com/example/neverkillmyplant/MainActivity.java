@@ -140,6 +140,7 @@ public class MainActivity extends Activity implements
 			} catch (NumberFormatException e) {
 				printSante = "inconnue";
 			}
+
 			str[2] = " Sante : " + printSante;
 			plantAttributs.add(str);
 
@@ -191,6 +192,8 @@ public class MainActivity extends Activity implements
 		Plant plantToRemove = planteListe.get(position);
 		planteListe.remove(plantToRemove);
 
+		//Serveur.removePlant(plantToRemove);
+		
 		planteListe.save("neverkillmyplant" + File.separator + "liste.data");
 		handleListView((ExpandableListView) findViewById(R.id.expandableListView1));
 

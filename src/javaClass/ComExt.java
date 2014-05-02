@@ -17,11 +17,7 @@ public class ComExt {
 		adresse += ComExt.getServeurURL();
 		adresse += ComExt.getUserId() + "/";
 		adresse += "plants/";
-		String sticker = plant.getSticker();
-		if (sticker == "Sticker Jaune")
-			adresse += "1/";
-		else if (sticker == "Sticker Noir")
-			adresse += "2/";
+		adresse += plant.getNumStick() + "/";
 		adresse += "list?method=plain";
 		return adresse;
 	}

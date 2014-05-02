@@ -16,14 +16,12 @@ public class Serveur {
 		adresse += "newUser/";
 		adresse += Secure.ANDROID_ID;
 		adresse += "?method=plain";
-		System.out.println("depart");
 
 		class TheTask extends AsyncTask<String, String, String> {
 
 			protected void onPostExecute(String result) {
 				// TODO Auto-generated method stub
 				super.onPostExecute(result);
-				System.out.println(result);
 				ComExt.setUserId(result);
 			}
 
@@ -88,7 +86,6 @@ public class Serveur {
 				}
 			}
 		}
-
 		new TheTask().execute(url);
 		try {
 			Thread.sleep(300);
@@ -97,5 +94,86 @@ public class Serveur {
 			e.printStackTrace();
 		}
 		return ComExt.getSanteInter();
+	}
+
+	public static void addPlant(Plant plant) {
+		String adresse = ComExt.getServeurURL();
+		adresse += ComExt.getUserId() + "/";
+		adresse += "new/";
+		adresse += plant.getNumStick() + "/";
+
+		class TheTask extends AsyncTask<String, String, String> {
+
+			protected void onPostExecute(String result) {
+				// TODO Auto-generated method stub
+				super.onPostExecute(result);
+			}
+
+			@Override
+			protected void onPreExecute() {
+				// TODO Auto-generated method stub
+				super.onPreExecute();
+			}
+
+			@Override
+			protected String doInBackground(String... params) {
+				try {
+					HttpClient httpclient = new DefaultHttpClient();
+					HttpPost method = new HttpPost(params[0]);
+					HttpResponse response = httpclient.execute(method);
+					HttpEntity entity = response.getEntity();
+					if (entity != null) {
+						return EntityUtils.toString(entity);
+					} else {
+						return "No string";
+					}
+				} catch (Exception e) {
+					return "Network problem";
+				}
+			}
+		}
+
+		new TheTask().execute(adresse);
+	}
+
+	public static void removePlant(Plant plant) {
+		String adresse = ComExt.getServeurURL();
+		adresse += ComExt.getUserId() + "/";
+		adresse += "plants/";
+		adresse += plant.getNumStick() + "/";
+		adresse += "delete/";
+
+		class TheTask extends AsyncTask<String, String, String> {
+
+			protected void onPostExecute(String result) {
+				// TODO Auto-generated method stub
+				super.onPostExecute(result);
+			}
+
+			@Override
+			protected void onPreExecute() {
+				// TODO Auto-generated method stub
+				super.onPreExecute();
+			}
+
+			@Override
+			protected String doInBackground(String... params) {
+				try {
+					HttpClient httpclient = new DefaultHttpClient();
+					HttpPost method = new HttpPost(params[0]);
+					HttpResponse response = httpclient.execute(method);
+					HttpEntity entity = response.getEntity();
+					if (entity != null) {
+						return EntityUtils.toString(entity);
+					} else {
+						return "No string";
+					}
+				} catch (Exception e) {
+					return "Network problem";
+				}
+			}
+		}
+
+		new TheTask().execute(adresse);
 	}
 }

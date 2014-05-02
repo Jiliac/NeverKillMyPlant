@@ -81,6 +81,15 @@ public class Plant implements Parcelable, Externalizable {
 	public String getSticker(){
 		return this.sticker;
 	}
+	
+	public int getNumStick(){
+		if (this.sticker == "Sticker Jaune")
+			return 1;
+		else if (sticker == "Sticker Noir")
+			return 2;
+		else
+			return 3;
+	}
 
 	/********* Plant est un parcelable ************/
 	public void writeToParcel(Parcel dest, int flags) {

@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import javaClass.Plant;
 import javaClass.PlantArray;
+import javaClass.Serveur;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -82,7 +83,9 @@ public class AddPlantActivity extends Activity implements View.OnClickListener {
 			planteListe
 					.save("neverkillmyplant" + File.separator + "liste.data");
 		}
-
+		
+		//Serveur.addPlant(plant);
+		
 		// on crée l'alarme concernant cette plante
 		setAlarm(plant);
 
