@@ -1,8 +1,6 @@
 package com.example.neverkillmyplant;
 
 import javaClass.Plant;
-import javaClass.Serveur;
-
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -19,7 +17,7 @@ public class CheckHealth extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent startIntent) {
-		// récupère la plante dont on crée le service
+		// rï¿½cupï¿½re la plante dont on crï¿½e le service
 		Plant plante = (Plant) startIntent.getParcelableExtra("plant");
 
 		//String sante = Serveur.getSante(plante);
@@ -27,7 +25,7 @@ public class CheckHealth extends IntentService {
 		// CREATION ET ENVOI DE LA NOTIF
 
 		//if(sante == "0")
-		notificationCreator(plante);
+		//notificationCreator(plante);
 		
 	}
 
@@ -35,7 +33,9 @@ public class CheckHealth extends IntentService {
 	public static int ID_NOTIFICATION = 0;
 
 	private void notificationCreator(Plant plante) {
-		Intent notificationIntent = new Intent(CheckHealth.this,
+		String name = plante.getName();
+
+        Intent notificationIntent = new Intent(CheckHealth.this,
 				CheckHealth.class);
 		notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		PendingIntent contentIntent = PendingIntent.getActivity(
@@ -43,8 +43,8 @@ public class CheckHealth extends IntentService {
 
 		Notification notification = new Notification(R.drawable.ficus,
 				"Alerte", System.currentTimeMillis());
-		notification.setLatestEventInfo(CheckHealth.this, "Rosier est malade!",
-				"Vous devriez l'arroser ou vérifier qu'elle n'est pas malade.",
+		notification.setLatestEventInfo(CheckHealth.this, name + " est malade!",
+				"Vous devriez l'arroser ou vï¿½rifier qu'elle n'est pas malade.",
 				contentIntent);
 
 		NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

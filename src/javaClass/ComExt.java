@@ -18,7 +18,7 @@ public class ComExt {
 		adresse += ComExt.getUserId() + "/";
 		adresse += "plants/";
 		adresse += plant.getNumStick() + "/";
-		adresse += "list?method=plain";
+		adresse += "sante?method=plain";
 		return adresse;
 	}
 

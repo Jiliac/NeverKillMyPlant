@@ -83,13 +83,33 @@ public class Plant implements Parcelable, Externalizable {
 	}
 	
 	public int getNumStick(){
-		if (this.sticker == "Sticker Jaune")
-			return 1;
-		else if (sticker == "Sticker Noir")
-			return 2;
+        char c = this.sticker.toLowerCase().charAt(8);
+        int retour;
+		if (c == 'j')
+			retour = 1;
+		else if (c == 'n')
+			retour = 2;
 		else
-			return 3;
+			retour = 3;
+        return retour;
 	}
+
+    public String getSante(){
+        String sante = Serveur.getSante(this);
+        String printSante = "problem";
+        try {
+            int health = Integer.parseInt(sante);
+            if (health == 0)
+                printSante = "mauvaise";
+            else if (health == 1)
+                printSante = "bonne";
+            else if(health == -1)
+                printSante = "non définie";
+        } catch (NumberFormatException e) {
+            printSante = "inconnue (" + sante + ")";
+        }
+        return printSante;
+    }
 
 	/********* Plant est un parcelable ************/
 	public void writeToParcel(Parcel dest, int flags) {

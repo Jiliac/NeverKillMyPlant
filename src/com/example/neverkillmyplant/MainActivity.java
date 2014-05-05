@@ -6,18 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javaClass.ComExt;
 import javaClass.ExpandableListAdapter;
 import javaClass.Plant;
 import javaClass.PlantArray;
 import javaClass.Serveur;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,18 +17,14 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Settings.Secure;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ExpandableListView;
-
 import com.example.neverkillmyplant.test.DiagnostiqueActivity;
-
 import diagnostique.xiao.Xiao;
 
 public class MainActivity extends Activity implements
@@ -79,7 +67,7 @@ public class MainActivity extends Activity implements
 		// bouton provisoire pour test
 		// boutonTestCentroide();
 
-		ComExt.setServeurURL("http://89.156.29.238:8080/");
+		//ComExt.setServeurURL("http://137.194.27.35:8080/");
 		Serveur.sendID();
 	}
 
@@ -128,18 +116,7 @@ public class MainActivity extends Activity implements
 			str[0] = plant.getPhotoFilePath();
 			str[1] = " Espece : " + plant.getEspece();
 
-			String sante = Serveur.getSante(plant);
-			String printSante = "problem";
-			try {
-				int health = Integer.parseInt(sante);
-				if (health == 0)
-					printSante = "mauvaise";
-
-				else if (health == 1)
-					printSante = "bonne";
-			} catch (NumberFormatException e) {
-				printSante = "inconnue";
-			}
+			String printSante = plant.getSante();
 
 			str[2] = " Sante : " + printSante;
 			plantAttributs.add(str);
@@ -192,7 +169,7 @@ public class MainActivity extends Activity implements
 		Plant plantToRemove = planteListe.get(position);
 		planteListe.remove(plantToRemove);
 
-		//Serveur.removePlant(plantToRemove);
+		Serveur.removePlant(plantToRemove);
 		
 		planteListe.save("neverkillmyplant" + File.separator + "liste.data");
 		handleListView((ExpandableListView) findViewById(R.id.expandableListView1));
@@ -206,7 +183,7 @@ public class MainActivity extends Activity implements
 	Bitmap img;
 
 	private void ajoutBoutonDiagnostique() {
-		// on créer le dossier de reception
+		// on crï¿½er le dossier de reception
 		final String dir = Environment
 				.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
 				+ "/picFolder/";
